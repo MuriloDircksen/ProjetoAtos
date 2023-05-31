@@ -1,0 +1,55 @@
+
+<div class="container small">
+
+  <form [formGroup]="formUsuario" *ngIf="formUsuario" (ngSubmit)="onSubmit()">
+
+    <img src="../../../assets/logo.png">
+    <div class="container-quadro" >
+      <div class="imagem">
+        <img src="../../../assets/seta-esquerda.png" alt="" routerLink="/login">
+      </div>
+      <div class="titulo">
+      <h2>Sign Up</h2>
+      <h6>Insira seus dados para criar uma conta</h6>
+      </div>
+      <br>
+      <div  class="form-floating mt-3 mb-4">
+        <input formControlName="nome" type="email" class="form-control" id="floatingNome" placeholder="Nome">
+        <label for="floatingNome">Nome</label>
+      </div>
+      <div  class="form-floating mt-3 mb-4">
+        <input formControlName="empresa" type="text" class="form-control" id="floatingEmpresa" placeholder="Empresa">
+        <label for="floatingEmpresa">Empresa</label>
+      </div>
+      <div  class="form-floating mt-3 mb-4">
+        <input formControlName="cnpj" type="text" class="form-control" id="floatingCnpj" placeholder="CNPJ">
+        <label for="floatingCnpj">CNPJ</label>
+      </div>
+      <div  class="form-floating mt-3 mb-4">
+        <input formControlName="email" type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+        <label for="floatingEmail">Informe seu e-mail</label>
+      </div>
+
+      <div  class="row">
+        <div class="form-floating mt-3 mb-4 col-6 ">
+          <input formControlName="senha" type="password" class="form-control" id="floatingSenha" placeholder="Senha">
+          <label for="floatingSenha">Senha</label>
+        </div>
+        <div class="form-floating mt-3 mb-4 col-6 ">
+          <input formControlName="confirmaSenha" type="password" class="form-control" id="floatingConfirma" placeholder="Confirmar Senha">
+          <label for="floatingConfirma">Confirma senha</label>
+        </div>
+      </div>
+
+
+
+      <button  type="submit" [disabled]="!formUsuario.valid" class="btn btn-primary">Criar conta</button>
+    </div>
+    <br>
+    <a class="texto">Já possui cadastro?</a>
+    <a class="acesso" routerLink="/login"> Realizar login</a>
+    </form>
+
+</div>
+
+

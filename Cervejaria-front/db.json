@@ -1,0 +1,112 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "admin",
+      "senha": "root1234",
+      "nomeEmpresa": "admin",
+      "cnpj": "11111111000111",
+      "email": "admin@admin.com"
+    },
+    {
+      "nome": "Murilo",
+      "senha": "12345678",
+      "nomeEmpresa": "kairos",
+      "cnpj": "11111111111111",
+      "email": "murilo@kairos.com",
+      "id": 2
+    },
+    {
+      "nome": "teste",
+      "senha": "12345678",
+      "nomeEmpresa": "teste",
+      "cnpj": "11111111111111",
+      "email": "murilo.dircksen@gmail.com",
+      "id": 3
+    }
+  ],
+  "receitas": [
+    {
+      "id": 1,
+      "nomeReceita": "Pilsen",
+      "responsavelReceita": "Murilo",
+      "estilo": "American Lager",
+      "ultima_atualizacao": "20/04/2023",
+      "orcamento": 9500
+
+    }
+
+  ],
+  "ingredientes": [
+    {
+      "id": 1,
+      "nomeIngrediente": "Malte Pilsen",
+      "tipo": "Malte",
+      "valor_unidade": 2.5,
+      "unidade": "kg",
+      "fornecedor": "agraria",
+      "validade": "04/2024",
+      "data_entrada": "25/04/2023"
+    },
+    {
+      "id": 2,
+      "nomeIngrediente": "Lupulo Tradition",
+      "tipo": "Lupulo",
+      "valor_unidade": 3.5,
+      "unidade": "g",
+      "fornecedor": "agraria",
+      "validade": "04/2024",
+      "data_entrada": "25/04/2023"
+    },
+    {
+      "id": 3,
+      "nomeIngrediente": "Fermento NovaLager",
+      "tipo": "Fermento",
+      "valor_unidade": 535.00,
+      "unidade": "pacote 500gr",
+      "fornecedor": "agraria",
+      "validade": "04/2024",
+      "data_entrada": "25/04/2023"
+    }
+  ],
+  "estoque":
+  [
+    {
+      "id": 1,
+      "nome": "insumos",
+      "quantidade": 500,
+      "fk_ingrediente": 1
+    },
+    {
+      "id": 1,
+      "nome": "insumos",
+      "quantidade": 10000,
+      "fk_ingrediente": 2
+    },
+    {
+      "id": 1,
+      "nome": "insumos",
+      "quantidade": 2,
+      "fk_ingrediente": 3
+    }
+
+  ],
+  "receita_ingrediente":[
+    {
+      "id": 1,
+      "receitaId": 1,
+      "ingredienteId": 1
+    },
+    {
+      "id": 1,
+      "receitaId": 1,
+      "ingredienteId": 2
+    },
+    {
+      "id": 1,
+      "receitaId": 1,
+      "ingredienteId": 3
+    }
+
+  ]
+}

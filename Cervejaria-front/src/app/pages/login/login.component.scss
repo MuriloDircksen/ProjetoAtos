@@ -1,0 +1,43 @@
+
+.quadro{
+  border-radius: 1px;
+  background-color: white;
+  padding: 40px;
+  width: 450px;
+  border-radius: 5px;
+}
+img{
+  width: 30px;
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+.container{
+  background-color: #f2f5ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 20px;
+  width: 100%;
+  max-width: 100%;
+
+}
+
+button{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.acesso{
+  text-decoration: none;
+}
+h6, label, .texto{
+  color: #B4B6C1;
+  text-decoration: none;
+}
+
+

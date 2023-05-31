@@ -1,0 +1,31 @@
+
+<div class="container small">
+
+  <form [formGroup]="formUsuario">
+
+    <img src="../../../assets/logo.png">
+    <div class="quadro">
+      <h2>Sign In</h2>
+      <h6>Insira suas credenciais para acessar a conta</h6>
+      <br>
+      <div class="form-floating mt-3 mb-4">
+        <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Informe seu e-mail</label>
+      </div>
+      <div class="form-floating mb-4">
+        <input formControlName="senha" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Informe sua senha</label>
+      </div>
+      <button (click)="onSubmit()" class="btn btn-primary">Entrar</button>
+    </div>
+
+    <br>
+    <a class="texto">Esqueceu a senha?</a>
+    <a class="acesso" routerLink="/recuperar"> Redefinir senha</a>
+    <br><br>
+    <a class="texto">Não tem uma conta?</a>
+    <a class="acesso"routerLink="/cadastro"> Cadastre-se</a>
+  </form>
+
+</div>
+
