@@ -1,1 +1,49 @@
-<p>header works!</p>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow small">
+
+  <div class="container-fluid">
+    <div class="ajustaLogo">
+      <img src="../../../assets/logo-com-nome.JPG" class="logo">
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="dropdown">
+        <img src="../../../assets/bell.svg">
+
+      </div>
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="../../../assets/foto.jpg"
+            class="rounded-circle"
+            height="25"
+            alt="Retrato de um homem"
+            loading="lazy"
+          />
+        </a>
+       <ul class="dropdown-menu dropdown-menu-white text-small shadow">
+          <li><a class="dropdown-item" >Conta</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" >Configurações</a></li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" routerLink="/login" (click)="sair()">Sair</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</nav>
+
+
