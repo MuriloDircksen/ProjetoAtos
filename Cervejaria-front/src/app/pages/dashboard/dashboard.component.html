@@ -1,1 +1,29 @@
-<p>dashboard works!</p>
+<h3>Dashboard</h3>
+
+<app-card [cervejasProduzidas]="cervejasProduzidas" [totalCusto]="totalCusto" [volumeProduzido]="volumeProduzido"></app-card>
+<div class="fundo">
+  <p>Maiores Orçamentos</p>
+  <table class="table">
+
+    <thead>
+      <tr>
+        <th scope="col">Nome Cerveja</th>
+        <th scope="col">Estilo Cerveja</th>
+        <th scope="col">Responsável</th>
+        <th scope="col">Volume</th>
+        <th scope="col">Data</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producao of ultimasProducoes">
+        <td>{{producao.nomeReceita}}</td>
+        <td>{{producao.estiloReceita}}</td>
+        <td>{{producao.responsavelProducao}}</td>
+        <td>{{producao.volumeProducao}}</td>
+        <td>{{producao.dataProducao | date : 'dd/MM/yyyy'}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+

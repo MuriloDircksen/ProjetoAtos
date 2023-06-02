@@ -31,8 +31,9 @@
       "nomeReceita": "Pilsen",
       "responsavelReceita": "Murilo",
       "estilo": "American Lager",
-      "ultima_atualizacao": "20/04/2023",
-      "orcamento": 9500
+      "ultima_atualizacao": "2023/04/20",
+      "orcamento": 9500,
+      "volumeReceita": 2000
 
     }
 
@@ -46,7 +47,7 @@
       "unidade": "kg",
       "fornecedor": "agraria",
       "validade": "04/2024",
-      "data_entrada": "25/04/2023"
+      "data_entrada": "2023/04/20"
     },
     {
       "id": 2,
@@ -75,19 +76,19 @@
       "id": 1,
       "nome": "insumos",
       "quantidade": 500,
-      "fk_ingrediente": 1
+      "ingredienteId": 1
     },
     {
       "id": 1,
       "nome": "insumos",
       "quantidade": 10000,
-      "fk_ingrediente": 2
+      "ingredienteId": 2
     },
     {
       "id": 1,
       "nome": "insumos",
       "quantidade": 2,
-      "fk_ingrediente": 3
+      "ingredienteId": 3
     }
 
   ],
@@ -108,5 +109,21 @@
       "ingredienteId": 3
     }
 
+  ],
+  "producao":[
+    {
+      "id": 1,
+      "quantidade": 2000,
+      "receitaId": 1,
+      "responsavel": "Murilo",
+      "dataProducao": "2023/03/2"
+    },
+    {
+      "id": 2,
+      "quantidade": 2000,
+      "receitaId": 1,
+      "responsavel": "Murilo",
+      "dataProducao": "2023/04/2"
+    }
   ]
 }

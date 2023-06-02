@@ -1,1 +1,23 @@
-<p>card works!</p>
+<div class="row d-flex justify-content-space-between">
+  <div class="card" >
+    <div class="card-body">
+      Cervejas Produzidas
+      <h3>{{cervejasProduzidas}}</h3>
+    </div>
+  </div>
+  <div class="card" >
+    <div class="card-body">
+      Custo Total (R$)
+      <h3 class="card-text">{{totalCusto |  currency: 'BRL'}}</h3>
+    </div>
+  </div>
+  <div class="card" >
+    <div class="card-body">
+     Volume Produzido (L)
+      <div class="container">
+        <h3 class="card-text col-6">{{volumeProduzido}}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
