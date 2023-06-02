@@ -1,0 +1,49 @@
+
+.fundo{
+  background-color: white;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.container{
+  color: #B4B6C1;
+}
+
+button{
+
+  width: 150px;
+  border-radius: 6px;
+}
+
+.imagemModa{
+  display: flex;
+  justify-content: center;
+}
+
+.botaoCancelar{
+  background-color: #ebebeb;
+  color: #B4B6C1;
+}
+
+.botoesPadrao{
+  display: flex;
+  justify-content: flex-end;
+  gap:20px
+}
+
+.botaoExcluir{
+
+  display: flex;
+  justify-content: flex-start;
+}
+
+input{
+  color: #B4B6C1;
+}
+
+.ajustaBotoes{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}

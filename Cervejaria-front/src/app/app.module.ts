@@ -17,6 +17,7 @@ import { FullComponent } from './layouts/full/full.component';
 import { ContentComponent } from './layouts/content/content.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ModificaReceitaComponent } from './pages/receita/modifica-receita/modifica-receita.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LoginComponent } from './pages/login/login.component';
     MenuLateralComponent,
     FullComponent,
     ContentComponent,
-    DashboardComponent
+    DashboardComponent,
+    ModificaReceitaComponent
   ],
   imports: [
     BrowserModule,

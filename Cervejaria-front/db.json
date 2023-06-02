@@ -96,17 +96,20 @@
     {
       "id": 1,
       "receitaId": 1,
-      "ingredienteId": 1
+      "ingredienteId": 1,
+      "quantidadeIngrediente": 500
     },
     {
       "id": 1,
       "receitaId": 1,
-      "ingredienteId": 2
+      "ingredienteId": 2,
+      "quantidadeIngrediente": 1000
     },
     {
       "id": 1,
       "receitaId": 1,
-      "ingredienteId": 3
+      "ingredienteId": 3,
+      "quantidadeIngrediente": 2
     }
 
   ],

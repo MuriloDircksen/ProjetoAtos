@@ -7,6 +7,8 @@ import { CadastroUsuarioComponent } from './pages/cadastro-usuario/cadastro-usua
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authUsuarioGuard } from './security/auth-usuario.guard';
+import { ReceitaComponent } from './pages/receita/receita.component';
+import { ModificaReceitaComponent } from './pages/receita/modifica-receita/modifica-receita.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,19 @@ const routes: Routes = [
         path: 'home',
         component: DashboardComponent
       },
+      {
+        path: 'receitas',
+        component: ReceitaComponent
+      },
+      {
+        path: 'receitas/:id',
+        component: ModificaReceitaComponent
+      },
+      {
+      path: 'receitas/criar',
+      component: ModificaReceitaComponent
+      }
+
 
 
     ]

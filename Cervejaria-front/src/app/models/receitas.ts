@@ -4,5 +4,6 @@ export interface IReceitas{
   responsavelReceita: string,
   estilo: string,
   ultima_atualizacao: Date,
-  orcamento: number
+  orcamento: number,
+  volumeReceita: number
 }
