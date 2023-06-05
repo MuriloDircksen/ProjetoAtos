@@ -35,23 +35,27 @@
             <label for="floatingOrcamento">Orçamento</label>
           </div>
           <div class="form-floating mt-3 mb-4 col-6 ">
-            <input formControlName="quantidadeIngrediente"  type="number" class="form-control" id="floatingquantidadeIngrediente" placeholder="Ano lançamento">
+            <input formControlName="quantidadeIngredientes" (change)="onChangecontagemIngrediente()"  type="number" min="0" class="form-control" id="floatingquantidadeIngrediente" >
             <label for="floatingquantidadeIngrediente">Quantidade de ingredientes</label>
           </div>
         </div>
         <h5>Ingredientes:</h5>
-        <div  class="row" *ngFor="let item of quantidadeIngredientes">
-          <div  class="form-floating mt-3 mb-4 col-6">
-            <select class="form-select" id="ingrediente"  formControlName="ingrediente" > <!-- [(ngModel="ingrediente.id")] (change)="onSelect($event.target.value) [ngModelOptions]="{standalone: true}""-->
-              <option value="" disabled selected>Ingredientes</option>
-              <option *ngFor="let ingrediente of listaIngredientes"  value="ingrediente.id">{{ingrediente.nomeIngrediente}}</option>
-            </select>
-          </div>
-          <div class="form-floating mt-3 mb-4 col-6 ">
-            <input formControlName="quantidade"  type="text" class="form-control" id="floatingQuantidade" placeholder="Quantidade">
-            <label for="floatingQuantidade">Quantidade</label>
+        <div >
+          <div  formArrayName="ingredientes">
+            <div class="row"  *ngFor="let ingrediente of numeroIngredientes.controls; let i=index" [formGroupName]="i">
+              <div class="form-floating mt-3 mb-4 col-6">
+                <select class="form-select" [id]="'ingrediente' + i"  formControlName="selectedIngredient" >
+              <option value="" disabled selected>Ingrediente {{ i + 1 }}</option>
+              <option *ngFor="let ingredienteItem of listaIngredientes"  [value]="ingredienteItem">{{ingredienteItem.nomeIngrediente}}</option>
+              </select>
+              </div>
+              <div class="form-floating mt-3 mb-4 col-6 ">
+              <input formControlName="quantidade"  type="text" class="form-control" id="floatingQuantidade" placeholder="Quantidade">
+              <label for="floatingQuantidade">Quantidade</label>
+            </div>
           </div>
         </div>
+      </div>
       </div>
       <div  class="imagemModa">
         <img src="../../../../assets/cliclo-moda.png">

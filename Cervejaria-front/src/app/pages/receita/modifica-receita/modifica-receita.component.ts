@@ -1,5 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IIngredientes } from 'src/app/models/ingredientes';
 import { IReceitas } from 'src/app/models/receitas';
@@ -11,16 +11,16 @@ import { ReceitasServiceService } from 'src/app/service/receita/receita-service.
   templateUrl: './modifica-receita.component.html',
   styleUrls: ['./modifica-receita.component.scss']
 })
-export class ModificaReceitaComponent implements OnInit, OnChanges{
+export class ModificaReceitaComponent implements OnInit{
 
   titulo!: string;
   receitaId!: any;
-  formReceita!: FormGroup
+  formReceita!: FormGroup;
   receita!: IReceitas;
   listaReceitas!: IReceitas[];
   listaIngredientes! : IIngredientes[];
   quantidadeIngredientes : any[] = [];
-  quantidades : number = 1;
+
 
 
   constructor(private activatedRoute: ActivatedRoute, private receitaService: ReceitasServiceService,
@@ -32,12 +32,16 @@ export class ModificaReceitaComponent implements OnInit, OnChanges{
     this.formReceita;
     this.buscaReceita();
     this.buscaIngredientes();
-    this.quantidades = parseInt(this.quantidadeIngrediente);
+    console.log(this.formReceita);
+
+    //this.oncontagemIngredienteChange();
+
   }
 
   buscaIngredientes(){
     this.ingredienteService.getIngredientes().subscribe((data)=>{
       this.listaIngredientes = data;
+
     })
   }
 
@@ -45,7 +49,7 @@ export class ModificaReceitaComponent implements OnInit, OnChanges{
 
     if(this.receitaId == "criar"){
       this.titulo = "Criar Receita"
-      this.defineQuantidadeIngredientes();
+      //this.defineQuantidadeIngredientes();
       this.criaFormCadastro();
 
       return;
@@ -53,18 +57,19 @@ export class ModificaReceitaComponent implements OnInit, OnChanges{
     this.titulo = "Editar Receita"
     this.criaFormEdicao();
     this.retornaQuantidadeIngredientes();
-   }
-   defineQuantidadeIngredientes(){
-    this.quantidadeIngredientes.length = this.quantidades;
-
-    console.log(this.quantidadeIngredientes);
 
    }
-   retornaQuantidadeIngredientes(){
-    this.receitaService.getReceitaIngredientes().subscribe((data)=>{
-      this.quantidadeIngredientes = data;
-    })
-   }
+  //  defineQuantidadeIngredientes(){
+  //   this.quantidadeIngredientes.length = this.quantidades;
+
+  //   console.log(this.quantidadeIngredientes);
+
+  //  }
+    retornaQuantidadeIngredientes(){
+     this.receitaService.getReceitaIngredientes().subscribe((data)=>{
+       this.quantidadeIngredientes = data;
+     })
+    }
 
     criaFormCadastro(){
       this.formReceita = this.formBuilder.group({
@@ -73,9 +78,8 @@ export class ModificaReceitaComponent implements OnInit, OnChanges{
        estilo: new FormControl('', Validators.required),
        orcamento: new FormControl(this.calculaOrcamento(), Validators.required),
        volumeReceita: new FormControl('', Validators.required),
-       quantidadeIngrediente: new FormControl(this.quantidades, Validators.required),
-       ingrediente: new FormControl('', Validators.required),
-       quantidade: new FormControl('' , Validators.required)
+       quantidadeIngredientes: [0 , Validators.required],
+       ingredientes: this.formBuilder.array([])
       })
     }
 
@@ -86,8 +90,17 @@ export class ModificaReceitaComponent implements OnInit, OnChanges{
       estilo: new FormControl(this.receita.estilo, Validators.required),
       orcamento: new FormControl(this.calculaOrcamento(), Validators.required),
       volumeReceita: new FormControl(this.receita.volumeReceita, Validators.required),
-      quantidadeIngrediente: new FormControl( this.quantidadeIngredientes.length, Validators.required)
+      quantidadeIngredientes: new FormControl( 0 || this.quantidadeIngredientes.length, Validators.required),
+      ingredientes: this.formBuilder.array([])
     });
+  }
+
+  get quantidades(){
+    return this.formReceita.get('quantidadeIngredientes')?.value;
+  }
+
+  get numeroIngredientes():FormArray {
+    return this.formReceita.get('ingredientes') as FormArray;
   }
   get nome(){
     return this.formReceita.get('nome')?.value;
@@ -104,13 +117,26 @@ export class ModificaReceitaComponent implements OnInit, OnChanges{
   get orcamento(){
     return this.formReceita.get('orcamento')?.value;
   }
-  get quantidadeIngrediente(){
-    return this.formReceita.get('quantidadeIngrediente')?.value;
-  }
 
-  ngOnChanges(changes : SimpleChanges){
-    console.log(changes);
 
+  onChangecontagemIngrediente() {
+    const contagemIngrediente = this.quantidades;
+    const contagemAtualIngrediente = this.numeroIngredientes;
+
+    if (contagemIngrediente < contagemAtualIngrediente.length) {
+      for (let i = contagemAtualIngrediente.length - 1; i >= contagemIngrediente; i--) {
+        contagemAtualIngrediente.removeAt(i);
+      }
+    } else {
+      for (let i = contagemAtualIngrediente.length; i < contagemIngrediente; i++) {
+        contagemAtualIngrediente.push(
+          this.formBuilder.group({
+            selectedIngredient: ['', Validators.required],
+            quantidade: ['', Validators.required]
+          })
+        );
+      }
+    }
   }
     buscaReceita(){
       if(this.receitaId == "criar"){
