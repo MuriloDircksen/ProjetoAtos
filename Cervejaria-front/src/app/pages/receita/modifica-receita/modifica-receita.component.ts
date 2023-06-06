@@ -20,38 +20,45 @@ export class ModificaReceitaComponent implements OnInit{
   listaReceitas!: IReceitas[];
   listaIngredientes! : IIngredientes[];
   quantidadeIngredientes : any[] = [];
+  orcamento : number = 0;
 
 
 
   constructor(private activatedRoute: ActivatedRoute, private receitaService: ReceitasServiceService,
     private formBuilder: FormBuilder, private router: Router,
-    private ingredienteService : IngredienteServiceService){}
+    private ingredienteService : IngredienteServiceService){
+      this.buscaIngredientes();
+    }
 
   ngOnInit(): void {
     this.receitaId = this.activatedRoute.snapshot.paramMap.get('id')
-    this.formReceita;
     this.buscaReceita();
-    this.buscaIngredientes();
-    console.log(this.formReceita);
+    this.formReceita;
 
-    //this.oncontagemIngredienteChange();
 
   }
 
   buscaIngredientes(){
     this.ingredienteService.getIngredientes().subscribe((data)=>{
       this.listaIngredientes = data;
-
     })
+  }
+  buscaReceita(){
+    if(this.receitaId == "criar"){
+      this.verificaTemId();
+      return;
+   }
+   this.receitaService.getReceita(parseFloat(this.receitaId)).subscribe((data)=>{
+    this.receita = data;
+    this.verificaTemId();
+   })
   }
 
   verificaTemId(){
 
     if(this.receitaId == "criar"){
       this.titulo = "Criar Receita"
-      //this.defineQuantidadeIngredientes();
       this.criaFormCadastro();
-
       return;
     }
     this.titulo = "Editar Receita"
@@ -59,12 +66,7 @@ export class ModificaReceitaComponent implements OnInit{
     this.retornaQuantidadeIngredientes();
 
    }
-  //  defineQuantidadeIngredientes(){
-  //   this.quantidadeIngredientes.length = this.quantidades;
 
-  //   console.log(this.quantidadeIngredientes);
-
-  //  }
     retornaQuantidadeIngredientes(){
      this.receitaService.getReceitaIngredientes().subscribe((data)=>{
        this.quantidadeIngredientes = data;
@@ -76,7 +78,6 @@ export class ModificaReceitaComponent implements OnInit{
        nome: new FormControl('', Validators.required),
        responsavelReceita: new FormControl('', [Validators.required]),
        estilo: new FormControl('', Validators.required),
-       orcamento: new FormControl(this.calculaOrcamento(), Validators.required),
        volumeReceita: new FormControl('', Validators.required),
        quantidadeIngredientes: [0 , Validators.required],
        ingredientes: this.formBuilder.array([])
@@ -88,7 +89,6 @@ export class ModificaReceitaComponent implements OnInit{
       nome: new FormControl(this.receita.nomeReceita, Validators.required),
       responsavelReceita: new FormControl(this.receita.responsavelReceita, Validators.required),
       estilo: new FormControl(this.receita.estilo, Validators.required),
-      orcamento: new FormControl(this.calculaOrcamento(), Validators.required),
       volumeReceita: new FormControl(this.receita.volumeReceita, Validators.required),
       quantidadeIngredientes: new FormControl( 0 || this.quantidadeIngredientes.length, Validators.required),
       ingredientes: this.formBuilder.array([])
@@ -114,10 +114,6 @@ export class ModificaReceitaComponent implements OnInit{
   get ultimaAtualizacao(){
     return this.formReceita.get('ultimaAtualizacao')?.value;
   }
-  get orcamento(){
-    return this.formReceita.get('orcamento')?.value;
-  }
-
 
   onChangecontagemIngrediente() {
     const contagemIngrediente = this.quantidades;
@@ -138,17 +134,23 @@ export class ModificaReceitaComponent implements OnInit{
       }
     }
   }
-    buscaReceita(){
+
+    calculaOrcamento(){
       if(this.receitaId == "criar"){
-        this.verificaTemId();
+        this.orcamento = 0;
+        this.numeroIngredientes.controls.forEach((control)=>{
+          const obj = control.value;
+
+
+          this.listaIngredientes.map((elemento)=>{
+            if(elemento.id == obj.selectedIngredient){
+              this.orcamento += obj.quantidade*elemento.valor_unidade;
+            }
+          })
+        })
         return;
      }
-     this.receitaService.getReceita(parseFloat(this.receitaId)).subscribe((data)=>{
-      this.receita = data;
-      this.verificaTemId();
-     })
     }
-    calculaOrcamento(){}
 
     modificaReceita(){}
   // async modificaReceita(){
