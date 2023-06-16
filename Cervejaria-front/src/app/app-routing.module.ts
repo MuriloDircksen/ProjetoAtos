@@ -9,6 +9,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { authUsuarioGuard } from './security/auth-usuario.guard';
 import { ReceitaComponent } from './pages/receita/receita.component';
 import { ModificaReceitaComponent } from './pages/receita/modifica-receita/modifica-receita.component';
+import { IngredienteComponent } from './pages/ingrediente/ingrediente.component';
+import { ModificaIngredienteComponent } from './pages/ingrediente/modifica-ingrediente/modifica-ingrediente.component';
 
 const routes: Routes = [
   {
@@ -54,10 +56,19 @@ const routes: Routes = [
       {
       path: 'receitas/criar',
       component: ModificaReceitaComponent
+      },
+      {
+        path:"ingredientes",
+        component: IngredienteComponent
+      },
+      {
+        path: 'ingredientes/:id',
+        component: ModificaIngredienteComponent
+      },
+      {
+      path: 'ingredientes/criar',
+      component: ModificaIngredienteComponent
       }
-
-
-
     ]
   }
 ];

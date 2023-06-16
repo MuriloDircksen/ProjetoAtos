@@ -42,7 +42,7 @@
         </div>
         <h5>Ingredientes:</h5>
         <div >
-          <div  formArrayName="ingredientes">
+          <div  formArrayName="ingredientes" *ngIf="numeroIngredientes.controls">
             <div class="row"  *ngFor="let ingrediente of numeroIngredientes.controls; let i=index" [formGroupName]="i">
               <div class="form-floating mt-3 mb-4 col-6">
                 <select (change)="calculaOrcamento()" class="form-select" [id]="'ingrediente' + i"  formControlName="selectedIngredient" >

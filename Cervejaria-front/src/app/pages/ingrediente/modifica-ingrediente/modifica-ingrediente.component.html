@@ -1,0 +1,62 @@
+<div class="container-cabecalho">
+  <h5>{{titulo}}</h5>
+</div>
+<br>
+<div class="fundo">
+  <div class="container">
+
+    <form [formGroup]="formIngrediente" *ngIf="formIngrediente" (ngSubmit)="alterarIngredientes()">
+      <div class="container-quadro" >
+
+        <br>
+        <div class="row">
+          <div  class="form-floating mt-3 mb-4 col-6">
+            <input formControlName="nomeIngrediente" type="text" class="form-control" id="floatingNome" placeholder="Nome ingrediente">
+            <label for="floatingNome">Nome do Ingrediente</label>
+          </div>
+          <div  class="form-floating mt-3 mb-4 col-6">
+            <input formControlName="tipoIngrediente" type="text" class="form-control" id="floatingNome" placeholder="Tipo ingrediente">
+            <label for="floatingNome">Tipo do Ingrediente</label>
+          </div>
+        </div>
+        <div class="row">
+          <div  class="form-floating mt-3 mb-4 col-6">
+            <input formControlName="valorUnidade" type="number" class="form-control" id="floatingNome" placeholder="Valor por unidade R$">
+            <label for="floatingNome">Valor por unidade R$</label>
+          </div>
+          <div  class="form-floating mt-3 mb-4 col-6">
+            <input formControlName="unidade" type="text" class="form-control" id="floatingResponsavel" placeholder="Unidade">
+            <label for="floatingResponsavel">Unidade</label>
+          </div>
+        </div>
+
+        <div  class="row">
+          <div class="form-floating mt-3 mb-4 col-6 ">
+            <input formControlName="fornecedor" type="text" class="form-control" id="floatingResponsavel" placeholder="Fornecedor">
+            <label for="floatingResponsavel">Fornecedor</label>
+          </div>
+          <div class="form-floating mt-3 mb-4 col-6 ">
+            <input formControlName="validade" type="date" class="form-control" id="floatingResponsavel" placeholder="Validade">
+            <label for="floatingResponsavel">Validade</label>
+          </div>
+        </div>
+      </div>
+      <br>
+<br><br><br>
+
+  <div class="ajustaBotoes">
+      <div class="botaoExcluir" *ngIf="ingredienteId !== 'criar'">
+        <button type="submit" class="btn btn-danger" (click)="excluiIngrediente()">Excluir</button>
+      </div>
+    <div class="botoesPadrao">
+      <button type="submit" (click)="null" class="btn btn-light botaoCancelar">Cancelar</button>
+      <button type="submit" [disabled]="!formIngrediente.valid" class="btn btn-primary">Atualizar</button>
+    </div>
+
+  </div>
+    </form>
+  </div>
+
+</div>
+
+

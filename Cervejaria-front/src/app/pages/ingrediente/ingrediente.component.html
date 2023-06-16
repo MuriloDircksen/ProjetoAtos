@@ -1,1 +1,29 @@
-<p>ingrediente works!</p>
+<div class="container-cabecalho">
+  <h5>Modelos</h5>
+  <button type="submit" (click)="criaIngrediente()">Criar Ingrediente</button>
+</div>
+<br><br>
+<div class="fundo">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome Ingrediente</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Valor Unidade</th>
+        <th scope="col">Unidade</th>
+        <th scope="col">Fornecedor</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let ingrediente of listaIngredientes"  [routerLink]="['/ingredientes/', ingrediente.id]" class="linhaClicavel">
+        <td>{{ingrediente.nomeIngrediente}}</td>
+        <td>{{ingrediente.tipo}}</td>
+        <td>{{ingrediente.valor_unidade | currency: 'BRL' }}</td>
+        <td>{{ingrediente.unidade}}</td>
+        <td>{{ingrediente.fornecedor}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+

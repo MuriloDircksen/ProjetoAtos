@@ -17,6 +17,9 @@ export class IngredienteServiceService {
     return this.http.get<IIngredientes[]>(this.url);
   }
 
+  getIngrediente(id:number):Observable<IIngredientes[]>{
+    return this.http.get<IIngredientes[]>(`${this.url}/${id}`)
+  }
   salvarIngrediente(ingrediente: IIngredientes): Observable<IIngredientes>{
     return this.http.post<IIngredientes>(this.url, ingrediente);
   }

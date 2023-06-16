@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IIngredientes } from 'src/app/models/ingredientes';
@@ -12,7 +13,7 @@ import { ReceitasServiceService } from 'src/app/service/receita/receita-service.
   templateUrl: './modifica-receita.component.html',
   styleUrls: ['./modifica-receita.component.scss']
 })
-export class ModificaReceitaComponent implements OnInit{
+export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
   titulo!: string;
   receitaId!: any;
@@ -24,7 +25,9 @@ export class ModificaReceitaComponent implements OnInit{
   quantidadeIngredientes : number = 0;
   orcamento : number = 0;
   quantidadeReceitas : number = 0;
-
+  subReceita!:Subscription;
+  subIngredientes!:Subscription;
+  subIngredienteReceita!: Subscription;
 
 
   constructor(private activatedRoute: ActivatedRoute, private receitaService: ReceitasServiceService,
@@ -42,19 +45,19 @@ export class ModificaReceitaComponent implements OnInit{
   }
 
   buscaIngredientes(){
-    this.ingredienteService.getIngredientes().subscribe((data)=>{
+    this.subIngredientes = this.ingredienteService.getIngredientes().subscribe((data)=>{
       this.listaIngredientes = data;
     })
   }
   buscaReceita(){
     if(this.receitaId == "criar"){
       this.verificaTemId();
-      this.receitaService.getReceitas().subscribe((data)=>{
+      this.subReceita = this.receitaService.getReceitas().subscribe((data)=>{
         this.quantidadeReceitas= data[data.length-1].id;
       })
       return;
    }
-   this.receitaService.getReceita(parseFloat(this.receitaId)).subscribe((data)=>{
+   this.subReceita = this.receitaService.getReceita(parseFloat(this.receitaId)).subscribe((data)=>{
     this.receita = data;
     this.orcamento = data.orcamento;
     this.verificaTemId();
@@ -77,7 +80,7 @@ export class ModificaReceitaComponent implements OnInit{
       if(this.receitaId == "criar"){
         return;
       }
-      this.receitaService.getReceitaIngredientes().subscribe((data)=>{
+      this.subIngredienteReceita = this.receitaService.getReceitaIngredientes().subscribe((data)=>{
         this.listaReceitaIngrediente = data;
         data.forEach((elemento)=>{
         if(elemento.receitaId == this.receitaId){
@@ -303,8 +306,6 @@ export class ModificaReceitaComponent implements OnInit{
       })
     }
 
-
-
    excluiReceita(){
 
     this.receitaService.excluirReceita(this.receitaId).subscribe(); //está fazendo cascade all verificar depois regras com back end
@@ -323,6 +324,11 @@ export class ModificaReceitaComponent implements OnInit{
 
       this.router.navigate(['/receitas']);
 
+  }
+  ngOnDestroy(): void {
+    this.subReceita.unsubscribe
+    this.subIngredientes.unsubscribe;
+    this.subIngredienteReceita.unsubscribe;
   }
 
 }

@@ -1,0 +1,27 @@
+
+.fundo{
+  background-color: white;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+td{
+  color: #B4B6C1;
+  padding: 15px;
+}
+
+.container-cabecalho{
+  display: flex;
+  justify-content: space-between;
+}
+
+button{
+  background-color: #0073CF;
+  color: white;
+  width: 150px;
+  border-radius: 6px;
+}
+
+.linhaClicavel{
+  cursor: pointer;
+
+}
