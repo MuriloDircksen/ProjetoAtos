@@ -31,7 +31,8 @@
 
         <div  class="row">
           <div class="form-floating mt-3 mb-4 col-6 ">
-            <input  class="form-control" id="floatingOrcamento" [value]="orcamento" placeholder="Orçamento">
+
+            <input  class="form-control" disabled id="floatingOrcamento" [value]="orcamento | currency: 'BRL'" placeholder="Orçamento">
             <label for="floatingOrcamento">Orçamento</label>
           </div>
           <div class="form-floating mt-3 mb-4 col-6 ">
@@ -46,7 +47,7 @@
               <div class="form-floating mt-3 mb-4 col-6">
                 <select (change)="calculaOrcamento()" class="form-select" [id]="'ingrediente' + i"  formControlName="selectedIngredient" >
                   <option value="" disabled selected>Ingrediente {{ i + 1 }}</option>
-                  <option *ngFor="let ingredienteItem of listaIngredientes"  [value]="ingredienteItem.id">{{ingredienteItem.nomeIngrediente}}</option>
+                  <option *ngFor="let ingredienteItem of listaIngredientes" [value]="ingredienteItem.id">{{ingredienteItem.nomeIngrediente}}</option>
                 </select>
               </div>
               <div class="form-floating mt-3 mb-4 col-6 ">
@@ -64,10 +65,10 @@
       <div>
         <div class="ajustaBotoes">
           <div class="botaoExcluir" *ngIf="receitaId !== 'criar'">
-            <button type="submit" class="btn btn-danger" (click)="null">Excluir</button>
+            <button type="submit" class="btn btn-danger" (click)="excluiReceita()">Excluir</button>
           </div >
           <div class="botoesPadrao">
-            <button type="submit" (click)="null" class="btn btn-light botaoCancelar">Cancelar</button>
+            <button type="submit" (click)="retornaPaginaReceita()" class="btn btn-light botaoCancelar">Cancelar</button>
             <button type="submit" [disabled]="!formReceita.valid" class="btn btn-primary">Atualizar</button>
           </div>
         </div>

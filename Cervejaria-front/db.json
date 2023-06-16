@@ -31,12 +31,10 @@
       "nomeReceita": "Pilsen",
       "responsavelReceita": "Murilo",
       "estilo": "American Lager",
-      "ultima_atualizacao": "2023/04/20",
-      "orcamento": 9500,
+      "ultima_atualizacao": "2023-06-16T14:02:10.261Z",
+      "orcamento": 2985,
       "volumeReceita": 2000
-
     }
-
   ],
   "ingredientes": [
     {
@@ -63,15 +61,14 @@
       "id": 3,
       "nomeIngrediente": "Fermento NovaLager",
       "tipo": "Fermento",
-      "valor_unidade": 535.00,
+      "valor_unidade": 535,
       "unidade": "pacote 500gr",
       "fornecedor": "agraria",
       "validade": "04/2024",
       "data_entrada": "25/04/2023"
     }
   ],
-  "estoque":
-  [
+  "estoque": [
     {
       "id": 1,
       "nome": "insumos",
@@ -90,30 +87,28 @@
       "quantidade": 2,
       "ingredienteId": 3
     }
-
   ],
-  "receita_ingrediente":[
+  "receita_ingrediente": [
     {
-      "id": 1,
+      "id": 3,
       "receitaId": 1,
       "ingredienteId": 1,
-      "quantidadeIngrediente": 500
+      "quantidadeIngrediente": 700
     },
     {
-      "id": 1,
-      "receitaId": 1,
-      "ingredienteId": 2,
-      "quantidadeIngrediente": 1000
-    },
-    {
-      "id": 1,
       "receitaId": 1,
       "ingredienteId": 3,
-      "quantidadeIngrediente": 2
+      "quantidadeIngrediente": 1,
+      "id": 9
+    },
+    {
+      "receitaId": 1,
+      "ingredienteId": 2,
+      "quantidadeIngrediente": 200,
+      "id": 10
     }
-
   ],
-  "producao":[
+  "producao": [
     {
       "id": 1,
       "quantidade": 2000,
