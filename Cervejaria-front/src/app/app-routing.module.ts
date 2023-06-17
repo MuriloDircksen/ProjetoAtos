@@ -11,6 +11,7 @@ import { ReceitaComponent } from './pages/receita/receita.component';
 import { ModificaReceitaComponent } from './pages/receita/modifica-receita/modifica-receita.component';
 import { IngredienteComponent } from './pages/ingrediente/ingrediente.component';
 import { ModificaIngredienteComponent } from './pages/ingrediente/modifica-ingrediente/modifica-ingrediente.component';
+import { EstoqueComponent } from './pages/estoque/estoque.component';
 
 const routes: Routes = [
   {
@@ -68,6 +69,14 @@ const routes: Routes = [
       {
       path: 'ingredientes/criar',
       component: ModificaIngredienteComponent
+      },
+      {
+      path: 'estoque',
+      component: EstoqueComponent
+      },
+      {
+      path: 'estoque/:id',
+      component: EstoqueComponent
       }
     ]
   }

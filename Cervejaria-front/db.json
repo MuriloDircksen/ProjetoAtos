@@ -40,6 +40,8 @@
     {
       "id": 1,
       "nomeIngrediente": "Malte Pilsen",
+      "idEstoque": 1,
+      "quantidade": 10000,
       "tipo": "Malte",
       "valor_unidade": 2.5,
       "unidade": "kg",
@@ -50,6 +52,8 @@
     {
       "id": 2,
       "nomeIngrediente": "Lupulo Tradition",
+      "idEstoque": 2,
+      "quantidade": 5000,
       "tipo": "Lupulo",
       "valor_unidade": 3.5,
       "unidade": "g",
@@ -60,32 +64,40 @@
     {
       "id": 3,
       "nomeIngrediente": "Fermento NovaLager",
+      "idEstoque": 3,
+      "quantidade": 2,
       "tipo": "Fermento",
       "valor_unidade": 535,
       "unidade": "pacote 500gr",
       "fornecedor": "agraria",
       "validade": "04/2024",
       "data_entrada": "25/04/2023"
+    },
+    {
+      "nomeIngrediente": "carafa I",
+      "idEstoque": null,
+      "quantidade": 500,
+      "tipo": "malte",
+      "valor_unidade": 5.5,
+      "unidade": "kg",
+      "fornecedor": "agraria",
+      "validade": "2024-06-04",
+      "data_entrada": "2023-06-17T00:05:35.494Z",
+      "id": 4
     }
   ],
-  "estoque": [
+  "estoques": [
     {
       "id": 1,
-      "nome": "insumos",
-      "quantidade": 500,
-      "ingredienteId": 1
+      "nome": "Malte "
     },
     {
-      "id": 1,
-      "nome": "insumos",
-      "quantidade": 10000,
-      "ingredienteId": 2
+      "id": 2,
+      "nome": "Lupulo "
     },
     {
-      "id": 1,
-      "nome": "insumos",
-      "quantidade": 2,
-      "ingredienteId": 3
+      "id": 3,
+      "nome": "Fermento "
     }
   ],
   "receita_ingrediente": [

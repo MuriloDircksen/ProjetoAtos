@@ -1,5 +1,5 @@
 <div class="container-cabecalho">
-  <h5>Modelos</h5>
+  <h5>Ingredientes</h5>
   <button type="submit" (click)="criaIngrediente()">Criar Ingrediente</button>
 </div>
 <br><br>
@@ -11,6 +11,7 @@
         <th scope="col">Tipo</th>
         <th scope="col">Valor Unidade</th>
         <th scope="col">Unidade</th>
+        <th scope="col">Estoque</th>
         <th scope="col">Fornecedor</th>
       </tr>
     </thead>
@@ -20,6 +21,7 @@
         <td>{{ingrediente.tipo}}</td>
         <td>{{ingrediente.valor_unidade | currency: 'BRL' }}</td>
         <td>{{ingrediente.unidade}}</td>
+        <td>{{ingrediente.quantidade}}</td>
         <td>{{ingrediente.fornecedor}}</td>
       </tr>
     </tbody>

@@ -14,9 +14,7 @@ export class IngredienteComponent implements OnDestroy, OnInit  {
    listaIngredientes!: IIngredientes[] ;
    subIngredientes!: Subscription;
 
-   constructor(private ingredienteService: IngredienteServiceService, private router: Router){
-
-   }
+   constructor(private ingredienteService: IngredienteServiceService, private router: Router){  }
 
    ngOnInit(): void {
       this.buscaIngredientes();
@@ -34,7 +32,7 @@ export class IngredienteComponent implements OnDestroy, OnInit  {
    }
 
  ngOnDestroy(): void {
-
+    this.subIngredientes.unsubscribe();
  }
 
 }
