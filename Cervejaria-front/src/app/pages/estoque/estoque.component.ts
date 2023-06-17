@@ -23,7 +23,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
    constructor(private ingredienteService: IngredienteServiceService,
     private estoqueService : EstoqueServiceService, private router: Router){
       this.buscaIngredientes();
-      this.buscaEstoque();
+
     }
 
    ngOnInit(): void {
@@ -33,6 +33,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
   buscaIngredientes(){
    this.subIngredientes = this.ingredienteService.getIngredientes().subscribe((data)=>{
      this.listaIngredientes = data;
+     this.buscaEstoque();
      this.combinarIngredientes();
    })
   }

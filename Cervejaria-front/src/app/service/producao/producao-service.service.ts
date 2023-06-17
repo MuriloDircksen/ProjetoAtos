@@ -12,8 +12,11 @@ export class ProducaoServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getProducaos():Observable<IProducao[]>{
+  getProducoes():Observable<IProducao[]>{
     return this.http.get<IProducao[]>(this.url);
+  }
+  getProducao(id:number):Observable<IProducao[]>{
+    return this.http.get<IProducao[]>(`${this.url}/${id}`);
   }
 
   salvarProducao(producao: IProducao): Observable<IProducao>{
@@ -22,7 +25,6 @@ export class ProducaoServiceService {
   atualizarProducao(producao: IProducao): Observable<IProducao> {
     return this.http.put<IProducao>(`${this.url}/${producao.id}`, producao);
   }
-
   excluirProducao(id: number): Observable<IProducao> {
     return this.http.delete<any>(`${this.url}/${id}`);
   }

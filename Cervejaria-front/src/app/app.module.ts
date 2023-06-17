@@ -19,6 +19,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ModificaReceitaComponent } from './pages/receita/modifica-receita/modifica-receita.component';
 import { ModificaIngredienteComponent } from './pages/ingrediente/modifica-ingrediente/modifica-ingrediente.component';
+import { ProduzirComponent } from './pages/produzir/produzir.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ModificaIngredienteComponent } from './pages/ingrediente/modifica-ingre
     ContentComponent,
     DashboardComponent,
     ModificaReceitaComponent,
-    ModificaIngredienteComponent
+    ModificaIngredienteComponent,
+    ProduzirComponent
   ],
   imports: [
     BrowserModule,

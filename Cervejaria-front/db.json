@@ -138,6 +138,13 @@
       "receitaId": 1,
       "responsavel": "Murilo",
       "dataProducao": "2023/04/2"
+    },
+    {
+      "quantidade": 1980,
+      "receitaId": 1,
+      "responsavel": "Murilo",
+      "dataProducao": "2023-06-17T18:35:09.121Z",
+      "id": 3
     }
   ]
 }

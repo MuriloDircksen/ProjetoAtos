@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
 
   }
   buscaProducoes(){
-    this.producaoServiceService.getProducaos().subscribe((data)=>{
+    this.producaoServiceService.getProducoes().subscribe((data)=>{
       this.listaProducao = data;
       this.cervejasProduzidas = data.length;
       data.forEach((producao)=>{

@@ -12,6 +12,7 @@ import { ModificaReceitaComponent } from './pages/receita/modifica-receita/modif
 import { IngredienteComponent } from './pages/ingrediente/ingrediente.component';
 import { ModificaIngredienteComponent } from './pages/ingrediente/modifica-ingrediente/modifica-ingrediente.component';
 import { EstoqueComponent } from './pages/estoque/estoque.component';
+import { ProduzirComponent } from './pages/produzir/produzir.component';
 
 const routes: Routes = [
   {
@@ -75,8 +76,8 @@ const routes: Routes = [
       component: EstoqueComponent
       },
       {
-      path: 'estoque/:id',
-      component: EstoqueComponent
+      path: 'produzir',
+      component: ProduzirComponent
       }
     ]
   }
