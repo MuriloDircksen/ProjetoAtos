@@ -25,3 +25,15 @@ button{
   cursor: pointer;
 
 }
+.botãoAcao{
+  background-color: #363738;
+  width: 70px;
+  border-radius: 6px;
+}
+.botoesAcao{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}

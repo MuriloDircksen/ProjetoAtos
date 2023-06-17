@@ -5,6 +5,7 @@ export interface IIngredientes{
   quantidade: number,
   tipo: string,
   valor_unidade: number,
+  valorTotal: number,
   unidade: string,
   fornecedor: string,
   validade: Date,

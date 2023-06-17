@@ -53,7 +53,7 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
    }
 
    buscaEstoques(){
-    this.subEstoque = this.estoqueService.getEstoques().subscribe((data)=>{
+    this.subEstoques = this.estoqueService.getEstoques().subscribe((data)=>{
       this.listaEstoques = data;
     });
    }
@@ -130,6 +130,7 @@ async alterarIngredientes(){
       quantidade: this.quantidade,
       tipo: this.tipoIngrediente,
       valor_unidade: this.valorUnidade,
+      valorTotal: this.quantidade* this.valorUnidade,
       unidade: this.unidade,
       fornecedor: this.fornecedor,
       validade: this.validade,
@@ -146,6 +147,7 @@ async alterarIngredientes(){
     quantidade: this.quantidade,
     tipo: this.tipoIngrediente,
     valor_unidade: this.valorUnidade,
+    valorTotal: this.quantidade* this.valorUnidade,
     unidade: this.unidade,
     fornecedor: this.fornecedor,
     validade: this.validade,
@@ -166,8 +168,11 @@ retornaPaginaColecao(){
 }
 
 ngOnDestroy(): void {
+if(this.ingredienteId != "criar"){
   this.subIngrediente.unsubscribe();
   this.subEstoque.unsubscribe();
+}
+
   this.subEstoques.unsubscribe();
  }
 
