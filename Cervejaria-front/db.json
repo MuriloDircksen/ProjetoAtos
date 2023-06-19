@@ -41,7 +41,7 @@
       "id": 1,
       "nomeIngrediente": "Malte Pilsen",
       "idEstoque": 1,
-      "quantidade": 10000,
+      "quantidade": 9300,
       "tipo": "Malte",
       "valor_unidade": 2.5,
       "valorTotal": 25000,
@@ -54,7 +54,7 @@
       "id": 2,
       "nomeIngrediente": "Lupulo Tradition",
       "idEstoque": 2,
-      "quantidade": 5000,
+      "quantidade": 4800,
       "tipo": "Lupulo",
       "valor_unidade": 3.5,
       "valorTotal": 17500,
@@ -67,7 +67,7 @@
       "id": 3,
       "nomeIngrediente": "Fermento NovaLager",
       "idEstoque": 3,
-      "quantidade": 2,
+      "quantidade": 0,
       "tipo": "Fermento",
       "valor_unidade": 535,
       "valorTotal": 1070,
@@ -145,6 +145,13 @@
       "responsavel": "Murilo",
       "dataProducao": "2023-06-17T18:35:09.121Z",
       "id": 3
+    },
+    {
+      "quantidade": 2000,
+      "receitaId": 1,
+      "responsavel": "Murilo",
+      "dataProducao": "2023-06-19T23:23:00.905Z",
+      "id": 4
     }
   ]
 }
