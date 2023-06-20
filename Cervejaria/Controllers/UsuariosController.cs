@@ -68,15 +68,13 @@ namespace Cervejaria.Controllers
         public async Task<IActionResult> ListagemUsuario()
         {
             try
-            {
-                
-                return Ok(await _contexto.Usuarios.AsNoTracking().ToListAsync());              
-
-                
+            {                
+                return Ok(await _contexto.Usuarios.AsNoTracking().ToListAsync());           
+                                
             }
             catch (Exception ex)
             {
-                return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados: "+ex.ToString());
+                return BadRequest(ex.ToString());
             }
         }
         [HttpGet]
