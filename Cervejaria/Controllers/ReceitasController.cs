@@ -91,7 +91,6 @@ namespace Cervejaria.Controllers
         {
             var receitaDeletar = await _contexto.Receitas
                 .Include(x=>x.Producao)
-                .Include(y=>y.ReceitaIngredientes)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if(receitaDeletar == null) return NotFound("Receita não encontrada");
