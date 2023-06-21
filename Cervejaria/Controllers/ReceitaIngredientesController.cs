@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Cervejaria.Controllers
 {
     [ApiController]
-    [Route("api/receitangredientes")]
+    [Route("api/receitaingredientes")]
     public class ReceitaIngredientesController : ControllerBase
     {
         private readonly CervejariaContexto _contexto;
@@ -63,7 +63,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/receitangredientes/")]
+        [Route("api/receitaingredientes/")]
         public async Task<IActionResult> ListagemReceitaIngrediente()
         {
             try
@@ -78,7 +78,7 @@ namespace Cervejaria.Controllers
         }
         
         [HttpDelete]
-        [Route("/api/receitangredientes/{id")]
+        [Route("/api/receitaingredientes/{id")]
         public async Task<IActionResult> ExcluirReceitaIngrediente(
             [FromRoute] int id)
         {
