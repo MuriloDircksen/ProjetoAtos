@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Cervejaria.Models
 {
     [Index(nameof(Cnpj), IsUnique = true)]
+    [Index(nameof(Email), IsUnique = true)]
     public class Usuario
     {
         public int Id { get; set; }

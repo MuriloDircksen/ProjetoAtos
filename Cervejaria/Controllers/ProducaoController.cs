@@ -47,7 +47,7 @@ namespace Cervejaria.Controllers
                 return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados!");
             }
             var producaoAtualizar = await _contexto.Producoes.FirstOrDefaultAsync(x => x.Id == id);
-            if (producaoAtualizar == null) return NotFound("Receita não encontrada");
+            if (producaoAtualizar == null) return NotFound("Produção não encontrada");
 
             try
             {
@@ -83,7 +83,7 @@ namespace Cervejaria.Controllers
         {
             var producao = await _contexto.Producoes
                 .AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-            return producao == null ? NotFound("Receita não encontrado!") : Ok(producao);
+            return producao == null ? NotFound("Produção não encontrado!") : Ok(producao);
         }
         [HttpDelete]
         [Route("/api/producoes/{id")]
@@ -93,7 +93,7 @@ namespace Cervejaria.Controllers
             var producaoDeletar = await _contexto.Producoes                
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            if (producaoDeletar == null) return NotFound("Receita não encontrada");
+            if (producaoDeletar == null) return NotFound("Produção não encontrada");
 
             
             try

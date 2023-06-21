@@ -34,7 +34,7 @@ namespace Cervejaria.Controllers
             }
             catch (Exception ex)
             {
-                return Conflict("CNPJ já existe no banco de dados: " + ex.ToString());
+                return Conflict("CNPJ ou email já existe no banco de dados: " + ex.ToString());
             }
         }
         [HttpPut]
