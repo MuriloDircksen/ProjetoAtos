@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Cervejaria.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Cervejaria : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace Cervejaria.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeReceita = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    NomeReceita = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Responsavel = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Estilo = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     UltimaAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -54,7 +54,7 @@ namespace Cervejaria.Migrations
                     Senha = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     NomeEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cnpj = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,16 +152,16 @@ namespace Cervejaria.Migrations
             migrationBuilder.InsertData(
                 table: "Receitas",
                 columns: new[] { "Id", "Estilo", "NomeReceita", "Orcamento", "Responsavel", "UltimaAtualizacao", "VolumeReceita" },
-                values: new object[] { 1, "American Lager", "Pilsen", 2985.0, "Murilo", new DateTime(2023, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 2000.0 });
+                values: new object[] { 1, "American Lager", "Pilsen", 2985.0, "Murilo Dircksen", new DateTime(2023, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), 2000.0 });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
                 columns: new[] { "Id", "Cnpj", "Email", "Nome", "NomeEmpresa", "Senha" },
                 values: new object[,]
                 {
-                    { 1, "11111111000111", "admin@admin.com", "admin", "admin", "root1234" },
-                    { 2, "11111111111112", "murilo@kairos.com", "Murilo", "kairos", "12345678" },
-                    { 3, "11111111111113", "cintia@lohn.com", "Cintia", "lohn", "12345678" }
+                    { 1, "11111111000111", "admin@admin.com", "admin admin", "admin ltda.", "root1234" },
+                    { 2, "11111111111112", "murilo@kairos.com", "Murilo Dircksen", "Cervejaria kairos", "12345678" },
+                    { 3, "11111111111113", "cintia@lohn.com", "Cintia Veronese", "Cervejaria lohn", "12345678" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,9 +180,9 @@ namespace Cervejaria.Migrations
                 columns: new[] { "Id", "DataProducao", "ReceitaId", "Responsavel", "VolumeApronte" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2023, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Murilo", 2000.0 },
-                    { 2, new DateTime(2023, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Luke", 1980.0 },
-                    { 3, new DateTime(2023, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Murilo", 2130.0 }
+                    { 1, new DateTime(2023, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Murilo Dircksen", 2000.0 },
+                    { 2, new DateTime(2023, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "luke skywalker", 1980.0 },
+                    { 3, new DateTime(2023, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "Murilo Dircksen", 2130.0 }
                 });
 
             migrationBuilder.InsertData(
@@ -219,6 +219,12 @@ namespace Cervejaria.Migrations
                 name: "IX_Usuarios_Cnpj",
                 table: "Usuarios",
                 column: "Cnpj",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Usuarios_Email",
+                table: "Usuarios",
+                column: "Email",
                 unique: true);
         }
 

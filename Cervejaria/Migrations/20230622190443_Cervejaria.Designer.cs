@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cervejaria.Migrations
 {
     [DbContext(typeof(CervejariaContexto))]
-    [Migration("20230620124648_Initial")]
-    partial class Initial
+    [Migration("20230622190443_Cervejaria")]
+    partial class Cervejaria
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,7 +209,7 @@ namespace Cervejaria.Migrations
                             Id = 1,
                             DataProducao = new DateTime(2023, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReceitaId = 1,
-                            Responsavel = "Murilo",
+                            Responsavel = "Murilo Dircksen",
                             VolumeApronte = 2000.0
                         },
                         new
@@ -217,7 +217,7 @@ namespace Cervejaria.Migrations
                             Id = 2,
                             DataProducao = new DateTime(2023, 4, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReceitaId = 1,
-                            Responsavel = "Luke",
+                            Responsavel = "luke skywalker",
                             VolumeApronte = 1980.0
                         },
                         new
@@ -225,7 +225,7 @@ namespace Cervejaria.Migrations
                             Id = 3,
                             DataProducao = new DateTime(2023, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReceitaId = 1,
-                            Responsavel = "Murilo",
+                            Responsavel = "Murilo Dircksen",
                             VolumeApronte = 2130.0
                         });
                 });
@@ -245,8 +245,8 @@ namespace Cervejaria.Migrations
 
                     b.Property<string>("NomeReceita")
                         .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<double>("Orcamento")
                         .HasColumnType("float");
@@ -273,7 +273,7 @@ namespace Cervejaria.Migrations
                             Estilo = "American Lager",
                             NomeReceita = "Pilsen",
                             Orcamento = 2985.0,
-                            Responsavel = "Murilo",
+                            Responsavel = "Murilo Dircksen",
                             UltimaAtualizacao = new DateTime(2023, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             VolumeReceita = 2000.0
                         });
@@ -343,7 +343,7 @@ namespace Cervejaria.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -364,6 +364,9 @@ namespace Cervejaria.Migrations
                     b.HasIndex("Cnpj")
                         .IsUnique();
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Usuarios");
 
                     b.HasData(
@@ -372,8 +375,8 @@ namespace Cervejaria.Migrations
                             Id = 1,
                             Cnpj = "11111111000111",
                             Email = "admin@admin.com",
-                            Nome = "admin",
-                            NomeEmpresa = "admin",
+                            Nome = "admin admin",
+                            NomeEmpresa = "admin ltda.",
                             Senha = "root1234"
                         },
                         new
@@ -381,8 +384,8 @@ namespace Cervejaria.Migrations
                             Id = 2,
                             Cnpj = "11111111111112",
                             Email = "murilo@kairos.com",
-                            Nome = "Murilo",
-                            NomeEmpresa = "kairos",
+                            Nome = "Murilo Dircksen",
+                            NomeEmpresa = "Cervejaria kairos",
                             Senha = "12345678"
                         },
                         new
@@ -390,8 +393,8 @@ namespace Cervejaria.Migrations
                             Id = 3,
                             Cnpj = "11111111111113",
                             Email = "cintia@lohn.com",
-                            Nome = "Cintia",
-                            NomeEmpresa = "lohn",
+                            Nome = "Cintia Veronese",
+                            NomeEmpresa = "Cervejaria lohn",
                             Senha = "12345678"
                         });
                 });
@@ -399,7 +402,7 @@ namespace Cervejaria.Migrations
             modelBuilder.Entity("Cervejaria.Models.Ingrediente", b =>
                 {
                     b.HasOne("Cervejaria.Models.Estoque", "Estoque")
-                        .WithMany()
+                        .WithMany("Ingredientes")
                         .HasForeignKey("IdEstoque")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -435,6 +438,11 @@ namespace Cervejaria.Migrations
                     b.Navigation("Ingrediente");
 
                     b.Navigation("Receita");
+                });
+
+            modelBuilder.Entity("Cervejaria.Models.Estoque", b =>
+                {
+                    b.Navigation("Ingredientes");
                 });
 
             modelBuilder.Entity("Cervejaria.Models.Ingrediente", b =>

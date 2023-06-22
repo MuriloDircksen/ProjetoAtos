@@ -26,7 +26,7 @@ namespace Cervejaria.Controllers
             }
 
             var receita = await _contexto.Receitas.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.IdReceita);
-            var ingrediente = await _contexto.Ingredientes.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.Id);
+            var ingrediente = await _contexto.Ingredientes.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.IdIngrediente);
 
             if (ingrediente == null || receita == null) return NotFound("Receita ou ingrediente não encontrados");
 

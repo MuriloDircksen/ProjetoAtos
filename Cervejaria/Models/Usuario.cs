@@ -15,7 +15,7 @@ namespace Cervejaria.Models
         public string Nome { get; set; }
         [Required(ErrorMessage = "Campo nome de preenchimento obigatório!")]
         [Display(Name = "Informe a Senha")]
-        [StringLength(10, MinimumLength = 4)]
+        [StringLength(10, MinimumLength = 8)]
         public string Senha { get; set; }
         [Required(ErrorMessage = "Campo nome de preenchimento obigatório!")]
         public string NomeEmpresa { get; set; }

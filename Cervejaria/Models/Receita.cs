@@ -7,8 +7,8 @@ namespace Cervejaria.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "Campo nome de preenchimento obigatório!")]
-        [MaxLength(200, ErrorMessage = "Máximo de 200 caracteres")]
-        [MinLength(10, ErrorMessage = "Minimo de 10 caracteres")]
+        [MaxLength(100, ErrorMessage = "Máximo de 100 caracteres")]
+        [MinLength(3, ErrorMessage = "Minimo de 3 caracteres")]
         public string NomeReceita { get; set; }
         [Required(ErrorMessage = "Campo responsável de preenchimento obigatório!")]
         [MaxLength(200, ErrorMessage = "Máximo de 200 caracteres")]

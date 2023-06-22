@@ -36,7 +36,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpPut]
-        [Route("api/receitas/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> AtualizaDadosReceita(
             [FromBody] Receita receita,
             [FromRoute] int id)

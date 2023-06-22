@@ -31,27 +31,27 @@ namespace Cervejaria.Contexto
                    new Usuario
                    {
                        Id = 1,
-                       Nome = "admin",
+                       Nome = "admin admin",
                        Senha = "root1234",
-                       NomeEmpresa = "admin",
+                       NomeEmpresa = "admin ltda.",
                        Cnpj = "11111111000111",
                        Email = "admin@admin.com"
                    },
                     new Usuario
                     {
                         Id = 2,
-                        Nome = "Murilo",
+                        Nome = "Murilo Dircksen",
                         Senha = "12345678",
-                        NomeEmpresa = "kairos",
+                        NomeEmpresa = "Cervejaria kairos",
                         Cnpj = "11111111111112",
                         Email = "murilo@kairos.com"
                     },
                      new Usuario
                      {
                          Id = 3,
-                         Nome = "Cintia",
+                         Nome = "Cintia Veronese",
                          Senha = "12345678",
-                         NomeEmpresa = "lohn",
+                         NomeEmpresa = "Cervejaria lohn",
                          Cnpj = "11111111111113",
                          Email = "cintia@lohn.com"
                      }
@@ -61,7 +61,7 @@ namespace Cervejaria.Contexto
                 {
                     Id = 1,
                     NomeReceita = "Pilsen",
-                    Responsavel = "Murilo",
+                    Responsavel = "Murilo Dircksen",
                     Estilo = "American Lager",
                     UltimaAtualizacao = new DateTime(2023, 06, 16),
                     Orcamento = 2985,
@@ -177,7 +177,7 @@ namespace Cervejaria.Contexto
                         Id = 1,
                         ReceitaId = 1,
                         VolumeApronte = 2000,
-                        Responsavel = "Murilo",
+                        Responsavel = "Murilo Dircksen",
                         DataProducao = new DateTime(2023, 03, 02)
                     },
                     new Producao
@@ -185,7 +185,7 @@ namespace Cervejaria.Contexto
                         Id = 2,
                         ReceitaId = 1,
                         VolumeApronte = 1980,
-                        Responsavel = "Luke",
+                        Responsavel = "luke skywalker",
                         DataProducao = new DateTime(2023, 04, 02)
                     },
                     new Producao
@@ -193,7 +193,7 @@ namespace Cervejaria.Contexto
                         Id = 3,
                         ReceitaId = 1,
                         VolumeApronte = 2130,
-                        Responsavel = "Murilo",
+                        Responsavel = "Murilo Dircksen",
                         DataProducao = new DateTime(2023, 06, 02)
                     }
                );
