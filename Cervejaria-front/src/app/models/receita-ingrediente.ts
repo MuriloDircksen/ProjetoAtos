@@ -1,6 +1,6 @@
 export interface IReceitaIngrediente{
   id: number,
-  receitaId: number,
-  ingredienteId: number,
+  idReceita: number,
+  idIngrediente: number,
   quantidadeIngrediente: number
 }

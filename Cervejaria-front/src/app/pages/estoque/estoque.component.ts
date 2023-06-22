@@ -71,7 +71,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
           if (itemComb) {
             this.listaCombinada.push({
               id: estoque.id,
-              nomeEstoque: estoque.nome,
+              nomeEstoque: estoque.nomeEstoque,
               nomeIngrediente: itemComb.nomeIngrediente,
               quantidade: itemComb.quantidade,
               valorTotal: itemComb.valorTotal
@@ -80,7 +80,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
           } else {
             this.listaCombinada.push({
               id: estoque.id,
-              nomeEstoque: estoque.nome,
+              nomeEstoque: estoque.nomeEstoque,
               nomeIngrediente: ingrediente.nomeIngrediente,
               quantidade: ingrediente.quantidade,
               valorTotal: ingrediente.valorTotal
@@ -90,7 +90,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
       } else {
         this.listaCombinada.push({
           id: estoque.id,
-          nomeEstoque: estoque.nome,
+          nomeEstoque: estoque.nomeEstoque,
           nomeIngrediente: "Sem ingrediente",
           quantidade: 0,
           valorTotal:0

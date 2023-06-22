@@ -83,7 +83,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       this.subIngredienteReceita = this.receitaService.getReceitaIngredientes().subscribe((data)=>{
         this.listaReceitaIngrediente = data;
         data.forEach((elemento)=>{
-        if(elemento.receitaId == this.receitaId){
+        if(elemento.idReceita == this.receitaId){
           this.quantidadeIngredientes +=1;
         }
        })
@@ -104,7 +104,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
   criaFormEdicao(){
     this.formReceita = this.formBuilder.group({
       nome: new FormControl(this.receita.nomeReceita, Validators.required),
-      responsavelReceita: new FormControl(this.receita.responsavelReceita, Validators.required),
+      responsavelReceita: new FormControl(this.receita.responsavel, Validators.required),
       estilo: new FormControl(this.receita.estilo, Validators.required),
       volumeReceita: new FormControl(this.receita.volumeReceita, Validators.required),
       quantidadeIngredientes: new FormControl(this.quantidadeIngredientes, Validators.required),
@@ -163,7 +163,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
           const obj = control.value;
           this.listaIngredientes.map((elemento)=>{
             if(elemento.id == obj.selectedIngredient){
-              this.orcamento += obj.quantidade*elemento.valor_unidade;
+              this.orcamento += obj.quantidade*elemento.valorUnidade;
             }
           })
         })
@@ -181,7 +181,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
       this.listaReceitaIngrediente.forEach((elemento)=>{
         this.listaIngredientes.forEach((ingrediente)=>{
-          if(elemento.ingredienteId == ingrediente.id){
+          if(elemento.idIngrediente == ingrediente.id){
             this.adicionaIngrediente();
             const control = this.numeroIngredientes;
             const index = control.length-1;
@@ -204,9 +204,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
     if(this.receitaId === "criar"){
       const Receita: any= {
         nomeReceita: this.nome,
-        responsavelReceita: this.responsavelReceita,
+        responsavel: this.responsavelReceita,
         estilo: this.estilo,
-        ultima_atualizacao: new Date(),
+        ultimaAtualizacao: new Date(),
         orcamento: this.orcamento,
         volumeReceita: this.volumeReceita
       }
@@ -221,9 +221,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
      const Receita: any= {
         id: this.receita.id,
         nomeReceita: this.nome,
-        responsavelReceita: this.responsavelReceita,
+        responsavel: this.responsavelReceita,
         estilo: this.estilo,
-        ultima_atualizacao: new Date(),
+        ultimaAtualizacao: new Date(),
         orcamento: this.orcamento,
         volumeReceita: this.volumeReceita
      }
@@ -249,23 +249,23 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       let listaControleIngredientes: any = [];
        this.numeroIngredientes.controls.forEach((control)=>{
         const ingrediente: any = {
-            receitaId: parseInt(this.receitaId),
-           ingredienteId: parseInt(control.value.selectedIngredient),
+           receitaId: parseInt(this.receitaId),
+           idIngrediente: parseInt(control.value.selectedIngredient),
            quantidadeIngrediente: parseInt(control.value.quantidade)
          }
         listaControleIngredientes.push(ingrediente);
         })
 
-        const ingredienteAdicionados = listaControleIngredientes.filter((ingredienteTeste : any) => !this.listaReceitaIngrediente.some(prevIng => prevIng.ingredienteId === ingredienteTeste.ingredienteId));
+        const ingredienteAdicionados = listaControleIngredientes.filter((ingredienteTeste : any) => !this.listaReceitaIngrediente.some(prevIng => prevIng.idIngrediente === ingredienteTeste.ingredienteId));
         console.log("adicionar");
 
         console.log(ingredienteAdicionados);
-        const removerIngredientes = this.listaReceitaIngrediente.filter(prevIng => !listaControleIngredientes.some((ingredienteTeste: any) => ingredienteTeste.ingredienteId === prevIng.ingredienteId));
+        const removerIngredientes = this.listaReceitaIngrediente.filter(prevIng => !listaControleIngredientes.some((ingredienteTeste: any) => ingredienteTeste.ingredienteId === prevIng.idIngrediente));
         console.log("remover");
         console.log(removerIngredientes);
-        const alterarIngredientes = listaControleIngredientes.filter((ingredient:any) => {
-          const ingredientesAnterior = this.listaReceitaIngrediente.find(prevIng => prevIng.ingredienteId === ingredient.ingredienteId);
-          return ingredientesAnterior && (ingredientesAnterior.ingredienteId !== ingredient.ingredienteId || ingredientesAnterior.quantidadeIngrediente !== ingredient.quantidadeIngrediente);
+        const alterarIngredientes = listaControleIngredientes.filter((ingrediente:any) => {
+          const ingredientesAnterior = this.listaReceitaIngrediente.find(prevIng => prevIng.idIngrediente === ingrediente.idIngrediente);
+          return ingredientesAnterior && (ingredientesAnterior.idIngrediente !== ingrediente.idIngrediente || ingredientesAnterior.quantidadeIngrediente !== ingrediente.quantidadeIngrediente);
         });
         console.log("mudar");
         console.log(alterarIngredientes);
@@ -284,7 +284,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
    async alteraNovoIngredienteReceita(novaLista: any){
       novaLista.forEach((elemento: any) => {
         this.listaReceitaIngrediente.forEach((data)=>{
-          if(elemento.ingredienteId == data.ingredienteId){
+          if(elemento.ingredienteId == data.idIngrediente){
             const ingredienteReceita : any = {
               id: data.id,
               receitaId:elemento.receitaId,

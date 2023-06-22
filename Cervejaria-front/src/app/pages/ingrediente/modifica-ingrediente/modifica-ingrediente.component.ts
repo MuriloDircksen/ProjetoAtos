@@ -79,12 +79,10 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
        unidade: new FormControl(this.ingrediente.unidade , [Validators.required]),
        fornecedor: new FormControl(this.ingrediente.fornecedor , Validators.required),
        validade: new FormControl(this.ingrediente.validade , Validators.required),
-       idEstoque: new FormControl(this.estoque.nome, Validators.required),
+       idEstoque: new FormControl(this.estoque.nomeEstoque, Validators.required),
        quantidade: new FormControl(this.ingrediente.quantidade, Validators.required)
      });
    }
-
-
 
   get nomeIngrediente(){
     return this.formIngrediente.get('nomeIngrediente')?.value;

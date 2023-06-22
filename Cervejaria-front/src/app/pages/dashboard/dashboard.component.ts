@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
       this.listaProducao = data;
       this.cervejasProduzidas = data.length;
       data.forEach((producao)=>{
-        this.volumeProduzido += producao.quantidade;
+        this.volumeProduzido += producao.volumeApronte;
       })
       this.percorrerReceitas();
     })
@@ -56,14 +56,12 @@ export class DashboardComponent implements OnInit {
   criaListaProducoes(id:number, receita : IReceitas){
 
     this.listaProducao.forEach(element => {
-
-
       if(element.receitaId == id){
         this.listaProduções.push({
           nomeReceita: receita.nomeReceita,
           estiloReceita: receita.estilo,
           responsavelProducao: element.responsavel,
-          volumeProducao: element.quantidade,
+          volumeProducao: element.volumeApronte,
           dataProducao: new Date(element.dataProducao)
         })
         this.totalCusto += receita.orcamento;

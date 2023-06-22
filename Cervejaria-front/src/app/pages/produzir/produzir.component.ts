@@ -96,10 +96,10 @@ async produzirReceita(){
 }
 retirarMateriaPrimaEstoque(){
 
-  const ingredientesutilizados = this.listaReceitaIngrediente.filter((item)=> item.receitaId == this.receita);
+  const ingredientesutilizados = this.listaReceitaIngrediente.filter((item)=> item.idReceita == this.receita);
 
   ingredientesutilizados.forEach((ingrediente)=>{
-    const testaIngrediente = this.listaIngredientes.find((item) => item.id==ingrediente.ingredienteId);
+    const testaIngrediente = this.listaIngredientes.find((item) => item.id==ingrediente.idIngrediente);
     if (testaIngrediente) {
       if(testaIngrediente.quantidade - ingrediente.quantidadeIngrediente < 0){
         window.alert(`Ingrediente ${testaIngrediente.nomeIngrediente} possui quantidade insuficiente no estoque`)
@@ -109,22 +109,22 @@ retirarMateriaPrimaEstoque(){
   })
   if(this.controle){
     ingredientesutilizados.forEach((ingrediente)=>{
-      const ingredienteAtual = this.listaIngredientes.find((item) => item.id==ingrediente.ingredienteId);
+      const ingredienteAtual = this.listaIngredientes.find((item) => item.id==ingrediente.idIngrediente);
       if (ingredienteAtual) {
-          const estoqueAtualizao = {
+          const estoqueAtualizado = {
             id: ingredienteAtual.id,
             nomeIngrediente: ingredienteAtual?.nomeIngrediente,
             idEstoque: ingredienteAtual.idEstoque,
             quantidade: ingredienteAtual.quantidade - ingrediente.quantidadeIngrediente,
             tipo: ingredienteAtual.tipo,
-            valor_unidade: ingredienteAtual.valor_unidade,
+            valorUnidade: ingredienteAtual.valorUnidade,
             valorTotal: ingredienteAtual.valorTotal,
             unidade: ingredienteAtual.unidade,
             fornecedor: ingredienteAtual.fornecedor,
             validade:ingredienteAtual.validade,
-            data_entrada: ingredienteAtual.data_entrada
+            dataEntrada: ingredienteAtual.dataEntrada
           }
-          this.ingredienteService.atualizarIngrediente(estoqueAtualizao).subscribe();
+          this.ingredienteService.atualizarIngrediente(estoqueAtualizado).subscribe();
       }
     })
   }

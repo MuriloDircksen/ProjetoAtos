@@ -4,10 +4,10 @@ export interface IIngredientes{
   idEstoque: number,
   quantidade: number,
   tipo: string,
-  valor_unidade: number,
+  valorUnidade: number,
   valorTotal: number,
   unidade: string,
   fornecedor: string,
   validade: Date,
-  data_entrada: Date
+  dataEntrada: Date
 }

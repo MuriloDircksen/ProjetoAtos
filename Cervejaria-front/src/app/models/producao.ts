@@ -1,6 +1,6 @@
 export interface IProducao{
   id: number,
-  quantidade: number,
+  volumeApronte: number,
   receitaId: number,
   responsavel: string,
   dataProducao: Date

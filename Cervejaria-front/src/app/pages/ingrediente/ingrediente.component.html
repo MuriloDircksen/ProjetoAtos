@@ -19,7 +19,7 @@
       <tr *ngFor="let ingrediente of listaIngredientes"  [routerLink]="['/ingredientes/', ingrediente.id]" class="linhaClicavel">
         <td>{{ingrediente.nomeIngrediente}}</td>
         <td>{{ingrediente.tipo}}</td>
-        <td>{{ingrediente.valor_unidade | currency: 'BRL' }}</td>
+        <td>{{ingrediente.valorUnidade | currency: 'BRL' }}</td>
         <td>{{ingrediente.unidade}}</td>
         <td>{{ingrediente.quantidade}}</td>
         <td>{{ingrediente.fornecedor}}</td>

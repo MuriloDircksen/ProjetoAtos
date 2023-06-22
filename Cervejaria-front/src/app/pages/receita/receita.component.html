@@ -1,6 +1,6 @@
 <div class="container-cabecalho">
   <h5>Receitas</h5>
-  <button type="submit" (click)="criarReceita()">Criar Coleção</button>
+  <button type="submit" (click)="criarReceita()">Criar Receita</button>
 </div>
 <br><br>
 
@@ -22,9 +22,9 @@
 
         <td>{{receita.nomeReceita}}</td>
         <td>{{receita.estilo}}</td>
-        <td>{{receita.responsavelReceita}}</td>
+        <td>{{receita.responsavel}}</td>
         <td>{{receita.volumeReceita}}</td>
-        <td>{{receita.ultima_atualizacao | date : 'dd/MM/yyyy'}}</td>
+        <td>{{receita.ultimaAtualizacao | date : 'dd/MM/yyyy'}}</td>
 
       </tr>
 

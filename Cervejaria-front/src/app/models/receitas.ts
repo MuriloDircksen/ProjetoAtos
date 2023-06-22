@@ -1,9 +1,9 @@
 export interface IReceitas{
   id: number,
   nomeReceita: string,
-  responsavelReceita: string,
+  responsavel: string,
   estilo: string,
-  ultima_atualizacao: Date,
+  ultimaAtualizacao: Date,
   orcamento: number,
   volumeReceita: number
 }
