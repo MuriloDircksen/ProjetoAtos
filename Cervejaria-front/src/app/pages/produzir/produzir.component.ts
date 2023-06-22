@@ -49,7 +49,7 @@ export class ProduzirComponent implements OnInit,OnDestroy{
       estilo: new FormControl( {value: this.receitaProducao.estilo, disabled: true}),
       volume: new FormControl( {value: this.receitaProducao.volumeReceita, disabled: true}),
       volumeApronte: new FormControl('' , [Validators.required]),
-      responsavel: new FormControl('', Validators.required),
+      responsavel: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
       orcamento: new FormControl( {value: this.receitaProducao.orcamento, disabled: true})
     });
  }

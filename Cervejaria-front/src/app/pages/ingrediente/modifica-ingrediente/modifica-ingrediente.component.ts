@@ -60,12 +60,12 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
 
    criaFormCadastro(){
      this.formIngrediente = this.formBuilder.group({
-       nomeIngrediente: new FormControl('', Validators.required),
-       tipoIngrediente: new FormControl('', [Validators.required]),
+       nomeIngrediente: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
+       tipoIngrediente: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
        valorUnidade: new FormControl('', Validators.required),
        unidade: new FormControl('', [Validators.required]),
-       fornecedor: new FormControl('', Validators.required),
-       validade: new FormControl('', Validators.required),
+       fornecedor: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
+       validade: new FormControl('', [Validators.required]),
        idEstoque: new FormControl('', Validators.required),
        quantidade: new FormControl('', Validators.required)
      });
@@ -73,11 +73,11 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
 
    criaFormEdicao(){
      this.formIngrediente = this.formBuilder.group({
-       nomeIngrediente: new FormControl(this.ingrediente.nomeIngrediente , Validators.required),
-       tipoIngrediente: new FormControl(this.ingrediente.tipo , [Validators.required]),
+       nomeIngrediente: new FormControl(this.ingrediente.nomeIngrediente , [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
+       tipoIngrediente: new FormControl(this.ingrediente.tipo , [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
        valorUnidade: new FormControl(this.ingrediente.valor_unidade , Validators.required),
        unidade: new FormControl(this.ingrediente.unidade , [Validators.required]),
-       fornecedor: new FormControl(this.ingrediente.fornecedor , Validators.required),
+       fornecedor: new FormControl(this.ingrediente.fornecedor , [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
        validade: new FormControl(this.ingrediente.validade , Validators.required),
        idEstoque: new FormControl(this.estoque.nomeEstoque, Validators.required),
        quantidade: new FormControl(this.ingrediente.quantidade, Validators.required)

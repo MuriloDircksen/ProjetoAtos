@@ -92,9 +92,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
     criaFormCadastro(){
       this.formReceita = this.formBuilder.group({
-       nome: new FormControl('', Validators.required),
-       responsavelReceita: new FormControl('', [Validators.required]),
-       estilo: new FormControl('', Validators.required),
+       nome: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+       responsavelReceita: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
+       estilo: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(80)]),
        volumeReceita: new FormControl('', Validators.required),
        quantidadeIngredientes: [0 , Validators.required],
        ingredientes: this.formBuilder.array([])
@@ -103,9 +103,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
   criaFormEdicao(){
     this.formReceita = this.formBuilder.group({
-      nome: new FormControl(this.receita.nomeReceita, Validators.required),
-      responsavelReceita: new FormControl(this.receita.responsavel, Validators.required),
-      estilo: new FormControl(this.receita.estilo, Validators.required),
+      nome: new FormControl(this.receita.nomeReceita, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]),
+      responsavelReceita: new FormControl(this.receita.responsavel, [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
+      estilo: new FormControl(this.receita.estilo, [Validators.required, Validators.minLength(10), Validators.maxLength(80)]),
       volumeReceita: new FormControl(this.receita.volumeReceita, Validators.required),
       quantidadeIngredientes: new FormControl(this.quantidadeIngredientes, Validators.required),
       ingredientes: this.formBuilder.array([])

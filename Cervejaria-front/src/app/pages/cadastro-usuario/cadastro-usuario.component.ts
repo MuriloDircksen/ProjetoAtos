@@ -22,9 +22,8 @@ export class CadastroUsuarioComponent implements OnInit {
     this.formUsuario = this.formBuilder.group({
       email: new FormControl('', [Validators.required, Validators.email]),
       empresa: new FormControl('', [Validators.required]),
-      cnpj: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength
-      (14)]),
-      nome: new FormControl('', [Validators.required]),
+      cnpj: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]),
+      nome: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
       senha: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirmaSenha: new FormControl('', [Validators.required, Validators.minLength(8)]),
     });
