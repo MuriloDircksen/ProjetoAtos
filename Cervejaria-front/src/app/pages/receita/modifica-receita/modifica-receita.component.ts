@@ -16,7 +16,7 @@ import { ReceitasServiceService } from 'src/app/service/receita/receita-service.
 export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
   titulo!: string;
-  receitaId!: any;
+  receitaId: any = 0;
   formReceita!: FormGroup;
   receita!: IReceitas;
   listaReceitas!: IReceitas[];
@@ -35,6 +35,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
     private ingredienteService : IngredienteServiceService){
       this.buscaIngredientes();
       this.retornaQuantidadeIngredientes();
+
     }
 
   ngOnInit(): void {
@@ -108,7 +109,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       estilo: new FormControl(this.receita.estilo, [Validators.required, Validators.minLength(10), Validators.maxLength(80)]),
       volumeReceita: new FormControl(this.receita.volumeReceita, Validators.required),
       quantidadeIngredientes: new FormControl(this.quantidadeIngredientes, Validators.required),
-      ingredientes: this.formBuilder.array([])
+      ingredientes: this.formBuilder.array([ ])
     });
     this.carregarIngredienteFormulario();
   }
@@ -178,8 +179,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       });
     }
     carregarIngredienteFormulario(){
+      const ingredientes = this.listaReceitaIngrediente.filter((data) => data.idReceita == this.receitaId)
 
-      this.listaReceitaIngrediente.forEach((elemento)=>{
+      ingredientes.forEach((elemento)=>{
         this.listaIngredientes.forEach((ingrediente)=>{
           if(elemento.idIngrediente == ingrediente.id){
             this.adicionaIngrediente();
@@ -188,7 +190,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
             control.at(index).patchValue({
               selectedIngredient: ingrediente.id,
-              quantidade: elemento.quantidadeIngrediente
+              quantidade: elemento.quantidadeDeIngrediente
             });
           }
         })
@@ -228,20 +230,28 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
         volumeReceita: this.volumeReceita
      }
 
-    this.receitaService.atualizarReceita(Receita).subscribe();
+    this.receitaService.atualizarReceita(Receita).toPromise();
     this.alteraIngredientesReceita()
     this.retornaPaginaReceita();
 
   }
 
-     modificaIngredienteReceita(){
+  async modificaIngredienteReceita(){
+    console.log(this.quantidadeReceitas);
+
+     this.subReceita = this.receitaService.getReceitas().subscribe((data)=>{
+      this.quantidadeReceitas= data[data.length-1].id;
+    })
+
       this.numeroIngredientes.controls.forEach((control)=>{
         const ingredienteReceita : any = {
-          receitaId: this.quantidadeReceitas+1,
-          ingredienteId: control.value.selectedIngredient,
-          quantidadeIngrediente: control.value.quantidade
+          idReceita: this.quantidadeReceitas,
+          idIngrediente: control.value.selectedIngredient,
+          quantidadeDeIngrediente: control.value.quantidade
         }
-       this.receitaService.salvarReceitaIngredientes(ingredienteReceita).toPromise();
+        console.log(ingredienteReceita);
+
+      this.receitaService.salvarReceitaIngredientes(ingredienteReceita).toPromise();
       })
     }
 
@@ -249,23 +259,23 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       let listaControleIngredientes: any = [];
        this.numeroIngredientes.controls.forEach((control)=>{
         const ingrediente: any = {
-           receitaId: parseInt(this.receitaId),
+           idReceita: parseInt(this.receitaId),
            idIngrediente: parseInt(control.value.selectedIngredient),
-           quantidadeIngrediente: parseInt(control.value.quantidade)
+           quantidadeDeIngrediente: parseInt(control.value.quantidade)
          }
         listaControleIngredientes.push(ingrediente);
         })
 
-        const ingredienteAdicionados = listaControleIngredientes.filter((ingredienteTeste : any) => !this.listaReceitaIngrediente.some(prevIng => prevIng.idIngrediente === ingredienteTeste.ingredienteId));
+        const ingredienteAdicionados = listaControleIngredientes.filter((ingredienteTeste : any) => !this.listaReceitaIngrediente.some(prevIng => prevIng.idIngrediente === ingredienteTeste.idIngrediente));
         console.log("adicionar");
 
         console.log(ingredienteAdicionados);
-        const removerIngredientes = this.listaReceitaIngrediente.filter(prevIng => !listaControleIngredientes.some((ingredienteTeste: any) => ingredienteTeste.ingredienteId === prevIng.idIngrediente));
+        const removerIngredientes = this.listaReceitaIngrediente.filter(prevIng => !listaControleIngredientes.some((ingredienteTeste: any) => ingredienteTeste.idIngrediente === prevIng.idIngrediente));
         console.log("remover");
         console.log(removerIngredientes);
         const alterarIngredientes = listaControleIngredientes.filter((ingrediente:any) => {
           const ingredientesAnterior = this.listaReceitaIngrediente.find(prevIng => prevIng.idIngrediente === ingrediente.idIngrediente);
-          return ingredientesAnterior && (ingredientesAnterior.idIngrediente !== ingrediente.idIngrediente || ingredientesAnterior.quantidadeIngrediente !== ingrediente.quantidadeIngrediente);
+          return ingredientesAnterior && (ingredientesAnterior.idIngrediente !== ingrediente.idIngrediente || ingredientesAnterior.quantidadeDeIngrediente !== ingrediente.quantidadeDeIngrediente);
         });
         console.log("mudar");
         console.log(alterarIngredientes);
@@ -287,9 +297,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
           if(elemento.ingredienteId == data.idIngrediente){
             const ingredienteReceita : any = {
               id: data.id,
-              receitaId:elemento.receitaId,
-              ingredienteId: elemento.ingredienteId,
-              quantidadeIngrediente: elemento.quantidadeIngrediente
+              idReceita:elemento.receitaId,
+              idIngrediente: elemento.ingredienteId,
+              quantidadeDeIngrediente: elemento.quantidadeIngrediente
             }
             console.log(ingredienteReceita);
 

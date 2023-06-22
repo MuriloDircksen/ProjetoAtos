@@ -101,7 +101,7 @@ retirarMateriaPrimaEstoque(){
   ingredientesutilizados.forEach((ingrediente)=>{
     const testaIngrediente = this.listaIngredientes.find((item) => item.id==ingrediente.idIngrediente);
     if (testaIngrediente) {
-      if(testaIngrediente.quantidade - ingrediente.quantidadeIngrediente < 0){
+      if(testaIngrediente.quantidade - ingrediente.quantidadeDeIngrediente < 0){
         window.alert(`Ingrediente ${testaIngrediente.nomeIngrediente} possui quantidade insuficiente no estoque`)
        this.controle = false;
       }
@@ -115,7 +115,7 @@ retirarMateriaPrimaEstoque(){
             id: ingredienteAtual.id,
             nomeIngrediente: ingredienteAtual?.nomeIngrediente,
             idEstoque: ingredienteAtual.idEstoque,
-            quantidade: ingredienteAtual.quantidade - ingrediente.quantidadeIngrediente,
+            quantidade: ingredienteAtual.quantidade - ingrediente.quantidadeDeIngrediente,
             tipo: ingredienteAtual.tipo,
             valorUnidade: ingredienteAtual.valorUnidade,
             valorTotal: ingredienteAtual.valorTotal,
