@@ -28,7 +28,7 @@ namespace Cervejaria.Controllers
             {
                 await _contexto.Ingredientes.AddAsync(ingrediente);
                 await _contexto.SaveChangesAsync();
-                return Created($"api/receitas/{ingrediente.Id}", ingrediente);
+                return Created($"api/ingredientes/{ingrediente.Id}", ingrediente);
             }
             catch (Exception ex)
             {
