@@ -50,7 +50,12 @@ namespace Cervejaria.Controllers
 
             try
             {
-                receitaAtualizar = receita;
+                receitaAtualizar.NomeReceita = receita.NomeReceita;
+                receitaAtualizar.Responsavel = receita.Responsavel;
+                receitaAtualizar.Estilo = receita.Estilo;
+                receitaAtualizar.UltimaAtualizacao = receita.UltimaAtualizacao;
+                receitaAtualizar.Orcamento = receita.Orcamento;
+                receitaAtualizar.VolumeReceita = receita.VolumeReceita;
 
                 _contexto.Receitas.Update(receitaAtualizar);
                 await _contexto.SaveChangesAsync();
@@ -85,7 +90,7 @@ namespace Cervejaria.Controllers
             return receita == null ? NotFound("Receita não encontrado!") : Ok(receita);
         }
         [HttpDelete]
-        [Route("/api/receitas/{id")]
+        [Route("/api/receitas/{id}")]
         public async Task<IActionResult> ExcluirReceita(
             [FromRoute] int id)
         {

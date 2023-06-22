@@ -50,7 +50,7 @@ namespace Cervejaria.Controllers
 
             try
             {
-                estoqueAtualizar = estoque;
+                estoqueAtualizar.NomeEstoque = estoque.NomeEstoque;
 
                 _contexto.Estoques.Update(estoqueAtualizar);
                 await _contexto.SaveChangesAsync();
@@ -85,7 +85,7 @@ namespace Cervejaria.Controllers
             return estoque == null ? NotFound("Estoque não encontrado!") : Ok(estoque);
         }
         [HttpDelete]
-        [Route("/api/estoques/{id")]
+        [Route("/api/estoques/{id}")]
         public async Task<IActionResult> ExcluirEstoque(
             [FromRoute] int id)
         {
@@ -101,7 +101,7 @@ namespace Cervejaria.Controllers
             }
             try
             {
-                _contexto.Ingredientes.Remove(estoqueDeletar);
+                _contexto.Estoques.Remove(estoqueDeletar);
                 await _contexto.SaveChangesAsync();
                 return NoContent();
             }

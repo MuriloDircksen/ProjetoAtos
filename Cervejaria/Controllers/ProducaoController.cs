@@ -51,7 +51,10 @@ namespace Cervejaria.Controllers
 
             try
             {
-                producaoAtualizar = producao;
+                producaoAtualizar.ReceitaId = producao.ReceitaId;
+                producaoAtualizar.VolumeApronte = producao.VolumeApronte;
+                producaoAtualizar.Responsavel = producao.Responsavel;
+                producaoAtualizar.DataProducao = producao.DataProducao;
 
                 _contexto.Producoes.Update(producao);
                 await _contexto.SaveChangesAsync();
@@ -86,7 +89,7 @@ namespace Cervejaria.Controllers
             return producao == null ? NotFound("Produção não encontrado!") : Ok(producao);
         }
         [HttpDelete]
-        [Route("/api/producoes/{id")]
+        [Route("/api/producoes/{id}")]
         public async Task<IActionResult> ExcluirProducao(
             [FromRoute] int id)
         {

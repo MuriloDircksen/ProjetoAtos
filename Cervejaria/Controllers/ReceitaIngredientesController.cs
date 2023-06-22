@@ -51,7 +51,9 @@ namespace Cervejaria.Controllers
 
             try
             {
-                receitaIngredienteAtualizar = receitaIngrediente;
+                receitaIngredienteAtualizar.IdIngrediente = receitaIngrediente.IdIngrediente;
+                receitaIngredienteAtualizar.IdReceita = receitaIngrediente.IdReceita;
+                receitaIngredienteAtualizar.QuantidadeDeIngrediente = receitaIngrediente.QuantidadeDeIngrediente;
 
                 _contexto.ReceitaIngredientes.Update(receitaIngredienteAtualizar);
                 await _contexto.SaveChangesAsync();
@@ -78,7 +80,7 @@ namespace Cervejaria.Controllers
         }
         
         [HttpDelete]
-        [Route("/api/receitaingredientes/{id")]
+        [Route("/api/receitaingredientes/{id}")]
         public async Task<IActionResult> ExcluirReceitaIngrediente(
             [FromRoute] int id)
         {

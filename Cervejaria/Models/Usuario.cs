@@ -24,7 +24,7 @@ namespace Cervejaria.Models
         [MaxLength(14, ErrorMessage = "Somente números, dando 14 caracteres")]
         public string Cnpj { get; set; }
         [Required(ErrorMessage = "Informe o seu email")]
-        [RegularExpression(".+\\@.+\\..+", ErrorMessage = "Informe um email válido...")]
+        //[RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Informe um email válido...")]
         public string Email { get; set; }
 
     }

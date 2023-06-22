@@ -50,7 +50,16 @@ namespace Cervejaria.Controllers
 
             try
             {
-                ingredienteAtualizar = ingrediente;
+                ingredienteAtualizar.NomeIngrediente = ingrediente.NomeIngrediente;
+                ingredienteAtualizar.IdEstoque = ingrediente.IdEstoque;
+                ingredienteAtualizar.Quantidade = ingrediente.Quantidade;
+                ingredienteAtualizar.Tipo = ingrediente.Tipo;   
+                ingredienteAtualizar.ValorUnidade = ingrediente.ValorUnidade;
+                ingredienteAtualizar.Unidade = ingrediente.Unidade;
+                ingredienteAtualizar.ValorTotal = ingrediente.ValorTotal;
+                ingredienteAtualizar.Fornecedor = ingrediente.Fornecedor;
+                ingredienteAtualizar.Validade = ingrediente.Validade;
+                ingredienteAtualizar.DataEntrada = ingrediente.DataEntrada;
 
                 _contexto.Ingredientes.Update(ingredienteAtualizar);
                 await _contexto.SaveChangesAsync();
@@ -85,7 +94,7 @@ namespace Cervejaria.Controllers
             return ingrediente == null ? NotFound("Ingrediente não encontrado!") : Ok(ingrediente);
         }
         [HttpDelete]
-        [Route("/api/ingredientes/{id")]
+        [Route("/api/ingredientes/{id}")]
         public async Task<IActionResult> ExcluirReceita(
             [FromRoute] int id)
         {

@@ -52,7 +52,12 @@ namespace Cervejaria.Controllers
 
             try
             {
-                usuarioAtualizar = usuario;
+                usuarioAtualizar.Nome = usuario.Nome;
+                usuarioAtualizar.NomeEmpresa = usuario.NomeEmpresa;
+                usuarioAtualizar.Email = usuario.Email;
+                usuarioAtualizar.Cnpj = usuario.Cnpj;
+                usuarioAtualizar.Senha = usuario.Senha;
+                
 
                 _contexto.Usuarios.Update(usuarioAtualizar);
                 await _contexto.SaveChangesAsync();
