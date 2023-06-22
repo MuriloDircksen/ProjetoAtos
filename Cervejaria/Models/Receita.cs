@@ -23,10 +23,10 @@ namespace Cervejaria.Models
         [DisplayFormat(DataFormatString = "mm/dd/yyyy", ApplyFormatInEditMode = true)]
         public DateTime UltimaAtualizacao { get; set; }
         [Required(ErrorMessage = "Orçamento é obrigatório")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
         public double Orcamento { get; set; }
         [Required(ErrorMessage = "Volume é obrigatório")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
         public double VolumeReceita { get; set; }
         [JsonIgnore]
         public ICollection<Producao>? Producao { get; set; }

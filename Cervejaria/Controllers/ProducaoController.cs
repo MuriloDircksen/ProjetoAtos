@@ -25,6 +25,10 @@ namespace Cervejaria.Controllers
                 return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados!");
             }
 
+            var receita = await _contexto.Receitas.FirstOrDefaultAsync(x => x.Id == producao.ReceitaId);
+
+            if (receita == null) return NotFound("Receita não encontrada");
+
             try
             {
                 await _contexto.Producoes.AddAsync(producao);
@@ -37,7 +41,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpPut]
-        [Route("api/producoes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> AtualizaDadosProducao(
             [FromBody] Producao producao,
             [FromRoute] int id)
@@ -48,6 +52,10 @@ namespace Cervejaria.Controllers
             }
             var producaoAtualizar = await _contexto.Producoes.FirstOrDefaultAsync(x => x.Id == id);
             if (producaoAtualizar == null) return NotFound("Produção não encontrada");
+
+            var receita = await _contexto.Receitas.FirstOrDefaultAsync(x => x.Id == producao.ReceitaId);
+
+            if (receita == null) return NotFound("Receita não encontrada");
 
             try
             {
@@ -66,7 +74,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/producoes/")]
+        
         public async Task<IActionResult> ListagemProducao()
         {
             try
@@ -80,7 +88,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/producoes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> ListarProducaoPorId(
             [FromRoute] int id)
         {

@@ -18,7 +18,7 @@ namespace Cervejaria.Models
         [JsonIgnore]
         public Ingrediente? Ingrediente { get; set; }
         [Required(ErrorMessage = "Quantidade de ingredientes em estoque é obrigatório")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
         public double QuantidadeDeIngrediente { get; set; }
     }
 }

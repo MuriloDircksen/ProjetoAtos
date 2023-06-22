@@ -67,7 +67,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/receitas/")]
+        
         public async Task<IActionResult> ListagemReceita()
         {
             try
@@ -81,7 +81,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/receitas/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> ListarReceitaPorId(
             [FromRoute] int id)
         {

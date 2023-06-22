@@ -17,13 +17,13 @@ namespace Cervejaria.Models
         [JsonIgnore]
         public Estoque? Estoque { get; set;}
         [Required(ErrorMessage = "Quantidade de ingredientes em estoque é obrigatório")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+       // [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
         public double Quantidade { get; set; }
-        [Required(ErrorMessage = "Valor unitário é obrigatório")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+        [Required(ErrorMessage = "Valor da unidade é obrigatório")]
+       // [RegularExpression("^\\d*\\.?\\d+$", ErrorMessage = "Somente números são permitidos.")]
         public double ValorUnidade { get; set; }
         [Required(ErrorMessage = "Valor total é obrigatório")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+       // [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
         public double ValorTotal { get; set; }
         [Required(ErrorMessage = "Campo unidade padrão preenchimento obigatório!")]
         public string Unidade { get; set; }

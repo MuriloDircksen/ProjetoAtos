@@ -36,7 +36,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpPut]
-        [Route("api/estoques/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> AtualizaDadosEstoques(
             [FromBody] Estoque estoque,
             [FromRoute] int id)
@@ -62,7 +62,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/estoques/")]
+        
         public async Task<IActionResult> ListagemEstoques()
         {
             try
@@ -76,7 +76,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/estoques/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> ListarEstoquePorId(
             [FromRoute] int id)
         {

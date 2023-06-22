@@ -24,6 +24,9 @@ namespace Cervejaria.Controllers
                 return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados!");
             }
 
+            var estoque = await _contexto.Estoques.FirstOrDefaultAsync(x => x.Id == ingrediente.IdEstoque);
+            if (estoque == null) return NotFound("Estoque não encontrada");
+
             try
             {
                 await _contexto.Ingredientes.AddAsync(ingrediente);
@@ -36,7 +39,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpPut]
-        [Route("api/ingredientes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> AtualizaDadosIngrediente(
             [FromBody] Ingrediente ingrediente,
             [FromRoute] int id)
@@ -71,7 +74,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/ingredientes/")]
+        
         public async Task<IActionResult> ListagemIngrediente()
         {
             try
@@ -85,7 +88,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/ingredientes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> ListarIngredientePorId(
             [FromRoute] int id)
         {

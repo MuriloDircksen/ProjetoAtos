@@ -13,7 +13,7 @@ namespace Cervejaria.Models
         [JsonIgnore]
         public Receita? Receita { get; set; }
         [Required]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
+       // [RegularExpression("^[0-9]*$", ErrorMessage = "Somente números são permitidos.")]
         public double VolumeApronte { get; set; }
         [Required(ErrorMessage = "Campo nome de preenchimento obigatório!")]
         [MaxLength(200, ErrorMessage = "Máximo de 200 caracteres")]

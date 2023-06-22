@@ -25,6 +25,11 @@ namespace Cervejaria.Controllers
                 return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados!");
             }
 
+            var receita = await _contexto.Receitas.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.IdReceita);
+            var ingrediente = await _contexto.Ingredientes.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.Id);
+
+            if (ingrediente == null || receita == null) return NotFound("Receita ou ingrediente não encontrados");
+
             try
             {
                 await _contexto.ReceitaIngredientes.AddAsync(receitaIngrediente);
@@ -37,7 +42,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpPut]
-        [Route("api/receitaingredientes/{id}")]
+        [Route("{id}")]
         public async Task<IActionResult> AtualizaDadosReceitaIgrediente(
             [FromBody] ReceitaIngrediente receitaIngrediente,
             [FromRoute] int id)
@@ -47,7 +52,13 @@ namespace Cervejaria.Controllers
                 return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados!");
             }
             var receitaIngredienteAtualizar = await _contexto.ReceitaIngredientes.FirstOrDefaultAsync(x => x.Id == id);
+            
             if (receitaIngredienteAtualizar == null) return NotFound("Relação receita ingrediente não encontrada");
+
+            var receita = await _contexto.Receitas.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.IdReceita);
+            var ingrediente = await _contexto.Ingredientes.FirstOrDefaultAsync(x => x.Id == receitaIngrediente.Id);
+           
+            if (ingrediente == null || receita == null) return NotFound("Receita ou ingrediente não encontrados");
 
             try
             {
@@ -65,7 +76,7 @@ namespace Cervejaria.Controllers
             }
         }
         [HttpGet]
-        [Route("api/receitaingredientes/")]
+        
         public async Task<IActionResult> ListagemReceitaIngrediente()
         {
             try
