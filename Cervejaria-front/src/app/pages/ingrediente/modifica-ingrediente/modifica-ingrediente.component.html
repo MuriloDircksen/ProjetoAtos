@@ -58,10 +58,10 @@
 
   <div class="ajustaBotoes">
       <div class="botaoExcluir" *ngIf="ingredienteId !== 'criar'">
-        <button type="submit" class="btn btn-danger" (click)="excluiIngrediente()">Excluir</button>
+        <button type="submit" class="btn btn-danger" (click)="buscaRelacaoReceitaIngrediente()">Excluir</button>
       </div>
     <div class="botoesPadrao">
-      <button type="submit" (click)="retornaPaginaColecao()" class="btn btn-light botaoCancelar">Cancelar</button>
+      <button type="submit" (click)="retornaPaginaIngrediente()" class="btn btn-light botaoCancelar">Cancelar</button>
       <button type="submit" [disabled]="!formIngrediente.valid" class="btn btn-primary">Atualizar</button>
     </div>
 

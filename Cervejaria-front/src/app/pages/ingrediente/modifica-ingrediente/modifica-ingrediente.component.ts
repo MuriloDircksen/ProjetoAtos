@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IEstoque } from 'src/app/models/estoque';
 import { IIngredientes } from 'src/app/models/ingredientes';
+import { IReceitaIngrediente } from 'src/app/models/receita-ingrediente';
 import { EstoqueServiceService } from 'src/app/service/estoque/estoque-service.service';
 import { IngredienteServiceService } from 'src/app/service/ingrediente/ingrediente-service.service';
+import { ReceitasServiceService } from 'src/app/service/receita/receita-service.service';
 
 @Component({
   selector: 'app-modifica-ingrediente',
@@ -22,9 +24,11 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
    subEstoque!: Subscription;
    subIngrediente!: Subscription;
    subEstoques!: Subscription;
+   subReceitaIngredientes!: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, private ingredienteService: IngredienteServiceService,
-     private formBuilder: FormBuilder, private router: Router, private estoqueService : EstoqueServiceService){}
+     private formBuilder: FormBuilder, private router: Router, private estoqueService : EstoqueServiceService,
+     private receitaIngredienteService : ReceitasServiceService){}
 
    ngOnInit(): void {
      this.ingredienteId = this.activatedRoute.snapshot.paramMap.get('id')
@@ -42,13 +46,12 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
     }
     this.titulo = "Editar Ingrediente"
     this.buscaEstoqueIngrediente();
-    this.criaFormEdicao();
-
    }
 
    buscaEstoqueIngrediente(){
     this.subEstoque = this.estoqueService.getEstoque(this.ingrediente.idEstoque).subscribe((data)=>{
       this.estoque = data;
+      this.criaFormEdicao();
     })
    }
 
@@ -75,11 +78,11 @@ export class ModificaIngredienteComponent implements OnInit, OnDestroy {
      this.formIngrediente = this.formBuilder.group({
        nomeIngrediente: new FormControl(this.ingrediente.nomeIngrediente , [Validators.required, Validators.minLength(5), Validators.maxLength(200)]),
        tipoIngrediente: new FormControl(this.ingrediente.tipo , [Validators.required, Validators.minLength(3), Validators.maxLength(50)]),
-       valorUnidade: new FormControl(this.ingrediente.valor_unidade , Validators.required),
+       valorUnidade: new FormControl(this.ingrediente.valorUnidade , Validators.required),
        unidade: new FormControl(this.ingrediente.unidade , [Validators.required]),
        fornecedor: new FormControl(this.ingrediente.fornecedor , [Validators.required, Validators.minLength(3), Validators.maxLength(80)]),
-       validade: new FormControl(this.ingrediente.validade , Validators.required),
-       idEstoque: new FormControl(this.estoque.nomeEstoque, Validators.required),
+       validade: new FormControl(new Date(this.ingrediente.validade).toISOString().substring(0, 10) , Validators.required),
+       idEstoque: new FormControl(this.estoque.id, Validators.required),
        quantidade: new FormControl(this.ingrediente.quantidade, Validators.required)
      });
    }
@@ -124,24 +127,24 @@ async alterarIngredientes(){
   if(this.ingredienteId === "criar"){
     const novoIngrediente: any= {
       nomeIngrediente: this.nomeIngrediente,
-      idEstoque: null,
+      idEstoque: this.idEstoque,
       quantidade: this.quantidade,
       tipo: this.tipoIngrediente,
-      valor_unidade: this.valorUnidade,
+      valorUnidade: this.valorUnidade,
       valorTotal: this.quantidade* this.valorUnidade,
       unidade: this.unidade,
       fornecedor: this.fornecedor,
       validade: this.validade,
-      data_entrada: new Date()
+      dataEntrada: new Date()
     }
     await this.ingredienteService.salvarIngrediente(novoIngrediente).toPromise();
-    this.retornaPaginaColecao();
+    this.retornaPaginaIngrediente();
     return;
   }
   const novoIngrediente: any= {
     id: this.ingredienteId,
     nomeIngrediente: this.nomeIngrediente,
-    idEstoque: null,
+    idEstoque: this.idEstoque,
     quantidade: this.quantidade,
     tipo: this.tipoIngrediente,
     valor_unidade: this.valorUnidade,
@@ -152,16 +155,31 @@ async alterarIngredientes(){
     data_entrada: this.ingrediente.data_entrada
   }
 
-  this.ingredienteService.atualizarIngrediente(novoIngrediente).toPromise();
-  this.retornaPaginaColecao();
+  await this.ingredienteService.atualizarIngrediente(novoIngrediente).toPromise();
+  this.retornaPaginaIngrediente();
 }
 
-excluiIngrediente(){
-  this;this.ingredienteService.excluirIngrediente(this.ingredienteId).subscribe();
+buscaRelacaoReceitaIngrediente(){
+  this.subReceitaIngredientes = this.receitaIngredienteService.getReceitaIngredientes().subscribe((data)=>{
+
+    const listaReceitaIngrediente = data.filter((elemento) => elemento.idIngrediente == this.ingredienteId);
+    this.excluiIngrediente(listaReceitaIngrediente);
+  })
+}
+
+async excluiIngrediente(listaVerificacao : IReceitaIngrediente[]){
+  console.log(listaVerificacao);
+
+  if(listaVerificacao.length>0){
+    window.alert("Não é permitido excluir ingrediente ligado á uma receita!")
+    this.retornaPaginaIngrediente();
+    return;
+  }
+  await this.ingredienteService.excluirIngrediente(this.ingredienteId).toPromise();
   this.router.navigate(['/ingredientes']);
 }
 
-retornaPaginaColecao(){
+retornaPaginaIngrediente(){
   this.router.navigate(['/ingredientes']);
 }
 
