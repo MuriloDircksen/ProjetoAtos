@@ -25,9 +25,11 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
   quantidadeIngredientes : number = 0;
   orcamento : number = 0;
   quantidadeReceitas : number = 0;
-  subReceita!:Subscription;
-  subIngredientes!:Subscription;
-  subIngredienteReceita!: Subscription;
+  private subReceita!:Subscription;
+  private subIngredientes!:Subscription;
+  private subIngredienteReceita!: Subscription;
+
+
 
 
   constructor(private activatedRoute: ActivatedRoute, private receitaService: ReceitasServiceService,
@@ -214,8 +216,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       }
 
       await this.receitaService.salvarReceita(Receita).toPromise();
-
-      this.modificaIngredienteReceita();
+      this.encontraIdReceita();
       this.retornaPaginaReceita();
       return;
     }
@@ -236,16 +237,17 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
   }
 
-  async modificaIngredienteReceita(){
-    console.log(this.quantidadeReceitas);
-
-     this.subReceita = this.receitaService.getReceitas().subscribe((data)=>{
-      this.quantidadeReceitas= data[data.length-1].id;
+  encontraIdReceita(){
+    this.subReceita = this.receitaService.getReceitas().subscribe((data)=>{
+      this.modificaIngredienteReceita(data[data.length-1].id)
     })
+  }
+
+  async modificaIngredienteReceita(receitaId : number){
 
       this.numeroIngredientes.controls.forEach((control)=>{
         const ingredienteReceita : any = {
-          idReceita: this.quantidadeReceitas,
+          idReceita: receitaId,
           idIngrediente: control.value.selectedIngredient,
           quantidadeDeIngrediente: control.value.quantidade
         }
@@ -312,7 +314,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
   async removeNovoIngredienteReceita(novaLista: any){
       novaLista.forEach((elemento : any)=>{
         console.log(elemento);
-        this.receitaService.excluirReceitaIngrediente(elemento.id).toPromise();
+        this.receitaService.excluirEspecialReceitaIngrediente(elemento.id).toPromise();
       })
     }
 

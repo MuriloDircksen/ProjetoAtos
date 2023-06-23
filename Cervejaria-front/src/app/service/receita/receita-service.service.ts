@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { Observable, catchError, retry,  throwError } from 'rxjs';
 import { IReceitaIngrediente } from 'src/app/models/receita-ingrediente';
 import { IReceitas } from 'src/app/models/receitas';
 
@@ -25,6 +25,7 @@ export class ReceitasServiceService {
       retry(2),
       catchError(this.handleError));
   }
+
   getReceitaIngredientes():Observable<IReceitaIngrediente[]>{
     return this.http.get<IReceitaIngrediente[]>(this.url2)
     .pipe(
@@ -49,6 +50,7 @@ export class ReceitasServiceService {
       retry(2),
       catchError(this.handleError));
   }
+
   atualizarReceita(receita: IReceitas): Observable<IReceitas> {
     return this.http.put<IReceitas>(`${this.url}/${receita.id}`, JSON.stringify(receita), this.httpOptions)
     .pipe(
@@ -69,6 +71,12 @@ export class ReceitasServiceService {
   }
   excluirReceitaIngrediente(id: number): Observable<IReceitas> {
     return this.http.delete<any>(`${this.url2}/${id}`)
+    .pipe(
+      retry(1),
+      catchError(this.handleError));
+  }
+  excluirEspecialReceitaIngrediente(id: number): Observable<IReceitas> {
+    return this.http.delete<any>(`${this.url2}/atualizar/${id}`)
     .pipe(
       retry(1),
       catchError(this.handleError));
