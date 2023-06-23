@@ -269,18 +269,14 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
         })
 
         const ingredienteAdicionados = listaControleIngredientes.filter((ingredienteTeste : any) => !this.listaReceitaIngrediente.some(prevIng => prevIng.idIngrediente === ingredienteTeste.idIngrediente));
-        console.log("adicionar");
 
-        console.log(ingredienteAdicionados);
         const removerIngredientes = this.listaReceitaIngrediente.filter(prevIng => !listaControleIngredientes.some((ingredienteTeste: any) => ingredienteTeste.idIngrediente === prevIng.idIngrediente));
-        console.log("remover");
-        console.log(removerIngredientes);
+
         const alterarIngredientes = listaControleIngredientes.filter((ingrediente:any) => {
           const ingredientesAnterior = this.listaReceitaIngrediente.find(prevIng => prevIng.idIngrediente === ingrediente.idIngrediente);
           return ingredientesAnterior && (ingredientesAnterior.idIngrediente !== ingrediente.idIngrediente || ingredientesAnterior.quantidadeDeIngrediente !== ingrediente.quantidadeDeIngrediente);
         });
-        console.log("mudar");
-        console.log(alterarIngredientes);
+
 
         this.adicionaNovoIngredienteReceita(ingredienteAdicionados);
         this.alteraNovoIngredienteReceita(alterarIngredientes);
@@ -294,18 +290,25 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       });
     }
    async alteraNovoIngredienteReceita(novaLista: any){
-      novaLista.forEach((elemento: any) => {
-        this.listaReceitaIngrediente.forEach((data)=>{
-          if(elemento.ingredienteId == data.idIngrediente){
-            const ingredienteReceita : any = {
-              id: data.id,
-              idReceita:elemento.receitaId,
-              idIngrediente: elemento.ingredienteId,
-              quantidadeDeIngrediente: elemento.quantidadeIngrediente
-            }
-            console.log(ingredienteReceita);
 
-            this.receitaService.atualizarReceitaIngrediente(ingredienteReceita).toPromise();
+    const listaFiltrada = this.listaReceitaIngrediente.filter((elemento)=> elemento.idReceita == this.receitaId)
+
+
+      novaLista.forEach((elemento: any) => {
+        listaFiltrada.forEach((data)=>{
+
+
+          if(elemento.idIngrediente == data.idIngrediente){
+
+            const ingredienteReceita : IReceitaIngrediente = {
+              id: data.id,
+              idReceita:elemento.idReceita,
+              idIngrediente: elemento.idIngrediente,
+              quantidadeDeIngrediente: elemento.quantidadeDeIngrediente
+            }
+
+
+            this.receitaService.atualizarReceitaIngrediente(ingredienteReceita).subscribe();
           }
         })
       });
