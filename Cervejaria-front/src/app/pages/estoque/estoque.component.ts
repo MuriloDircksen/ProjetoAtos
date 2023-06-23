@@ -59,14 +59,17 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
 
   }
 
-
   combinarListas(){
+
     for (const estoque of this.listaEstoque) {
       const ingredientesAssociados = this.listaIngredientes.filter(item => item.idEstoque === estoque.id);
 
       if (ingredientesAssociados.length > 0) {
         for (const ingrediente of ingredientesAssociados) {
           const itemComb = this.listaUnificadaIngredientes.find(item => item.id === ingrediente.id);
+          console.log(this.listaUnificadaIngredientes);
+
+          console.log(itemComb);
 
           if (itemComb) {
             this.listaCombinada.push({
@@ -77,15 +80,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
               valorTotal: itemComb.valorTotal
             });
 
-          } else {
-            this.listaCombinada.push({
-              id: estoque.id,
-              nomeEstoque: estoque.nomeEstoque,
-              nomeIngrediente: ingrediente.nomeIngrediente,
-              quantidade: ingrediente.quantidade,
-              valorTotal: ingrediente.valorTotal
-            });
-          }
+           }
         }
       } else {
         this.listaCombinada.push({
@@ -96,6 +91,8 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
           valorTotal:0
         });
       }
+      console.log(this.listaCombinada);
+
     }
   }
 
