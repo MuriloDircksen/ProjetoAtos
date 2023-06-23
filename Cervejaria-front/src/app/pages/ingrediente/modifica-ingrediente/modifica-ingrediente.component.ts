@@ -147,12 +147,12 @@ async alterarIngredientes(){
     idEstoque: this.idEstoque,
     quantidade: this.quantidade,
     tipo: this.tipoIngrediente,
-    valor_unidade: this.valorUnidade,
+    valorUnidade: this.valorUnidade,
     valorTotal: this.quantidade* this.valorUnidade,
     unidade: this.unidade,
     fornecedor: this.fornecedor,
     validade: this.validade,
-    data_entrada: this.ingrediente.data_entrada
+    dataEntrada: this.ingrediente.data_entrada
   }
 
   await this.ingredienteService.atualizarIngrediente(novoIngrediente).toPromise();

@@ -84,13 +84,13 @@ async produzirReceita(){
   this.retirarMateriaPrimaEstoque();
   if(this.controle){
     const receita:any ={
-        quantidade: this.volumeApronte,
+        volumeApronte: this.volumeApronte,
         receitaId: this.receita,
         responsavel: this.responsavel,
         dataProducao: new Date()
     }
 
-    this.producaoService.salvarProducao(receita).toPromise();
+   await this.producaoService.salvarProducao(receita).toPromise();
 }
   this.retornaDashboard()
 }
