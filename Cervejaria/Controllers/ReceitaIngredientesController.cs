@@ -117,5 +117,28 @@ namespace Cervejaria.Controllers
                 return BadRequest(ex.ToString());
             }
         }
+        [HttpDelete]
+        [Route("/api/receitaingredientes/atualizar/{id}")]
+        public async Task<IActionResult> ExcluirEspecialReceitaIngrediente(
+            [FromRoute] int id)
+        {
+            var receitaIngredienteDeletar = await _contexto.ReceitaIngredientes
+                .Include(y => y.Receita)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (receitaIngredienteDeletar == null) return NotFound("Receita não encontrada");
+
+            
+            try
+            {
+                _contexto.ReceitaIngredientes.Remove(receitaIngredienteDeletar);
+                await _contexto.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
     }
 }
