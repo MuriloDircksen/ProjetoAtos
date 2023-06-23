@@ -43,11 +43,11 @@ export class IngredienteServiceService {
       catchError(this.handleError));
   }
 
-  excluirIngrediente(id: number): Observable<IIngredientes> {
+  excluirIngrediente(id: number): Promise<IIngredientes> {
     return this.http.delete<any>(`${this.url}/${id}`)
     .pipe(
       retry(2),
-      catchError(this.handleError));
+      catchError(this.handleError)).toPromise();
   }
 
   handleError(error: HttpErrorResponse) {

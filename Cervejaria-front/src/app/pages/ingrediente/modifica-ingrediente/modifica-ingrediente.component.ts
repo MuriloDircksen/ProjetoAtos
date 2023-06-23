@@ -168,14 +168,15 @@ buscaRelacaoReceitaIngrediente(){
 }
 
 async excluiIngrediente(listaVerificacao : IReceitaIngrediente[]){
-  console.log(listaVerificacao);
 
   if(listaVerificacao.length>0){
     window.alert("Não é permitido excluir ingrediente ligado á uma receita!")
     this.retornaPaginaIngrediente();
     return;
   }
-  await this.ingredienteService.excluirIngrediente(this.ingredienteId).toPromise();
+  await this.ingredienteService.excluirIngrediente(this.ingredienteId);
+
+
   this.router.navigate(['/ingredientes']);
 }
 
