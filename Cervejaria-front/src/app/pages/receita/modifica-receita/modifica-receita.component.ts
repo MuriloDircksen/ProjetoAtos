@@ -7,6 +7,9 @@ import { IReceitaIngrediente } from 'src/app/models/receita-ingrediente';
 import { IReceitas } from 'src/app/models/receitas';
 import { IngredienteServiceService } from 'src/app/service/ingrediente/ingrediente-service.service';
 import { ReceitasServiceService } from 'src/app/service/receita/receita-service.service';
+import { ProducaoServiceService } from 'src/app/service/producao/producao-service.service';
+import { IProducao } from 'src/app/models/producao';
+
 
 @Component({
   selector: 'app-modifica-receita',
@@ -22,19 +25,21 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
   listaReceitas!: IReceitas[];
   listaIngredientes! : IIngredientes[];
   listaReceitaIngrediente : IReceitaIngrediente[] = [];
+  listaProducao!: IProducao[];
   quantidadeIngredientes : number = 0;
   orcamento : number = 0;
   quantidadeReceitas : number = 0;
   private subReceita!:Subscription;
   private subIngredientes!:Subscription;
   private subIngredienteReceita!: Subscription;
+  private subProducao!: Subscription;
 
 
 
 
   constructor(private activatedRoute: ActivatedRoute, private receitaService: ReceitasServiceService,
     private formBuilder: FormBuilder, private router: Router,
-    private ingredienteService : IngredienteServiceService){
+    private ingredienteService : IngredienteServiceService, private producaoService : ProducaoServiceService){
       this.buscaIngredientes();
       this.retornaQuantidadeIngredientes();
 
@@ -214,13 +219,11 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
         orcamento: this.orcamento,
         volumeReceita: this.volumeReceita
       }
-
       await this.receitaService.salvarReceita(Receita).toPromise();
       this.encontraIdReceita();
       this.retornaPaginaReceita();
       return;
     }
-
      const Receita: any= {
         id: this.receita.id,
         nomeReceita: this.nome,
@@ -236,7 +239,6 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
     this.retornaPaginaReceita();
 
   }
-
   encontraIdReceita(){
     this.subReceita = this.receitaService.getReceitas().subscribe((data)=>{
       this.modificaIngredienteReceita(data[data.length-1].id)
@@ -251,12 +253,10 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
           idIngrediente: control.value.selectedIngredient,
           quantidadeDeIngrediente: control.value.quantidade
         }
-        console.log(ingredienteReceita);
 
       this.receitaService.salvarReceitaIngredientes(ingredienteReceita).toPromise();
       })
     }
-
     alteraIngredientesReceita(){
       let listaControleIngredientes: any = [];
        this.numeroIngredientes.controls.forEach((control)=>{
@@ -267,7 +267,6 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
          }
         listaControleIngredientes.push(ingrediente);
         })
-
         const ingredienteAdicionados = listaControleIngredientes.filter((ingredienteTeste : any) => !this.listaReceitaIngrediente.some(prevIng => prevIng.idIngrediente === ingredienteTeste.idIngrediente));
 
         const removerIngredientes = this.listaReceitaIngrediente.filter(prevIng => !listaControleIngredientes.some((ingredienteTeste: any) => ingredienteTeste.idIngrediente === prevIng.idIngrediente));
@@ -277,11 +276,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
           return ingredientesAnterior && (ingredientesAnterior.idIngrediente !== ingrediente.idIngrediente || ingredientesAnterior.quantidadeDeIngrediente !== ingrediente.quantidadeDeIngrediente);
         });
 
-
         this.adicionaNovoIngredienteReceita(ingredienteAdicionados);
         this.alteraNovoIngredienteReceita(alterarIngredientes);
         this.removeNovoIngredienteReceita(removerIngredientes);
-
     }
     async adicionaNovoIngredienteReceita(novaLista: any){
       novaLista.forEach((elemento: IReceitaIngrediente) => {
@@ -290,24 +287,16 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       });
     }
    async alteraNovoIngredienteReceita(novaLista: any){
-
-    const listaFiltrada = this.listaReceitaIngrediente.filter((elemento)=> elemento.idReceita == this.receitaId)
-
-
+    const listaFiltrada = this.listaReceitaIngrediente.filter((elemento)=> elemento.idReceita == this.receitaId);
       novaLista.forEach((elemento: any) => {
         listaFiltrada.forEach((data)=>{
-
-
           if(elemento.idIngrediente == data.idIngrediente){
-
             const ingredienteReceita : IReceitaIngrediente = {
               id: data.id,
               idReceita:elemento.idReceita,
               idIngrediente: elemento.idIngrediente,
               quantidadeDeIngrediente: elemento.quantidadeDeIngrediente
             }
-
-
             this.receitaService.atualizarReceitaIngrediente(ingredienteReceita).subscribe();
           }
         })
@@ -316,24 +305,32 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
   async removeNovoIngredienteReceita(novaLista: any){
       novaLista.forEach((elemento : any)=>{
-        console.log(elemento);
         this.receitaService.excluirEspecialReceitaIngrediente(elemento.id).toPromise();
       })
     }
 
-   excluiReceita(){
+    buscaProducao(){
+      this.subProducao = this.producaoService.getProducoes().subscribe((data)=>{
+        const producao = data.filter((elemento) => elemento.receitaId == this.receita.id);
 
-    this.receitaService.excluirReceita(this.receitaId).subscribe(); //está fazendo cascade all verificar depois regras com back end
-   // this.exlcuiIngredientes();
-    this.router.navigate(['/Receita']);
+        this.excluiReceita(producao);
+      });
+      this.subProducao.unsubscribe;
+    }
 
-    // this.retornaPaginaReceita();
+   async excluiReceita(producao:any){
+
+    if(producao.length > 0){
+      window.alert("Não é possivel excluir uma receita com produção associada!")
+      this.router.navigate(['/Receita']);
+      return;
+    }
+    await this.receitaService.excluirReceita(this.receitaId).toPromise();
+
+    this.retornaPaginaReceita();
+
    }
-  //  async exlcuiIngredientes(){ //está fazendo cascade all
-  //   this.listaReceitaIngrediente.forEach((data)=>{
-  //     this.receitaService.excluirReceitaIngrediente(data.id).toPromise();
-  //   })
-  //  }
+
 
   retornaPaginaReceita(){
 
@@ -341,9 +338,11 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
 
   }
   ngOnDestroy(): void {
+
     this.subReceita.unsubscribe
     this.subIngredientes.unsubscribe;
     this.subIngredienteReceita.unsubscribe;
+
   }
 
 }

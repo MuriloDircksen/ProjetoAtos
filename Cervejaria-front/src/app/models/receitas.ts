@@ -1,3 +1,5 @@
+import { IProducao } from "./producao";
+
 export interface IReceitas{
   id: number,
   nomeReceita: string,
