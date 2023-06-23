@@ -155,7 +155,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       for (let i = contagemAtualIngrediente.length; i < contagemIngrediente; i++) {
         contagemAtualIngrediente.push(
           this.formBuilder.group({
-            selectedIngredient: ['', Validators.required],
+            selecionaIngrediente: ['', Validators.required],
             quantidade: ['', Validators.required]
           })
         );
@@ -196,7 +196,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
             const index = control.length-1;
 
             control.at(index).patchValue({
-              selectedIngredient: ingrediente.id,
+              selecionaIngrediente: ingrediente.id,
               quantidade: elemento.quantidadeDeIngrediente
             });
           }
@@ -250,7 +250,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       this.numeroIngredientes.controls.forEach((control)=>{
         const ingredienteReceita : any = {
           idReceita: receitaId,
-          idIngrediente: control.value.selectedIngredient,
+          idIngrediente: control.value.selecionaIngrediente,
           quantidadeDeIngrediente: control.value.quantidade
         }
 
