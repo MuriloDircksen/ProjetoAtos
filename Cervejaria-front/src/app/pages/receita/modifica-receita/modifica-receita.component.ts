@@ -165,23 +165,21 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
   }
 
     calculaOrcamento(){
-
         this.orcamento = 0;
         this.numeroIngredientes.controls.forEach((control)=>{
           const obj = control.value;
           this.listaIngredientes.map((elemento)=>{
-            if(elemento.id == obj.selectedIngredient){
+            if(elemento.id == obj.selecionaIngrediente){
               this.orcamento += obj.quantidade*elemento.valorUnidade;
             }
           })
         })
         return;
-
     }
 
     criaIngrediente(): FormGroup {
       return this.formBuilder.group({
-        selectedIngredient: '',
+        selecionaIngrediente: '',
         quantidade: ''
       });
     }
