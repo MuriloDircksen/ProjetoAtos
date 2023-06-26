@@ -115,12 +115,12 @@ namespace Cervejaria.Controllers
             }
         }
         /// <summary>
-        /// Recupera uma lista de usuários no banco de dados  
+        /// Recupera um usuário no banco de dados pelo seu id  
         /// </summary>        
         /// <param name="id">Id do usuario a ser recuperado no banco</param>
-        /// <returns>Dados dos usuarios</returns>
+        /// <returns>Dados do usuario</returns>
         /// <response code="200">Caso o usuario seja recuperada com sucesso</response>
-        /// <response code="404">Usuario não encontrado no banco de daos</response>
+        /// <response code="404">Usuario não encontrado no banco de dados</response>
         [HttpGet]
         [Route("/api/usuarios/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
