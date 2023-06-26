@@ -1,3 +1,69 @@
 label{
   margin-left: 10px;
 }
+
+.fundo{
+  background-color: white;
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.container{
+  color: #B4B6C1;
+}
+
+button{
+
+  width: 150px;
+  border-radius: 6px;
+}
+
+.imagemModa{
+  display: flex;
+  justify-content: center;
+}
+
+.botaoCancelar{
+  background-color: #ebebeb;
+  color: #B4B6C1;
+}
+
+.botoesPadrao{
+  display: flex;
+  justify-content: flex-end;
+  gap:20px
+}
+
+.botaoExcluir{
+
+  display: flex;
+  justify-content: flex-start;
+}
+
+input, select{
+  color: #B4B6C1;
+}
+
+.ajustaRadio{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px 30px;
+}
+
+select:required:invalid {
+  color:  #B4B6C1;
+}
+option[value=""][disabled] {
+  display: none;
+}
+
+.ajustaBotoes{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+label{
+  margin-left: 10px;
+}
