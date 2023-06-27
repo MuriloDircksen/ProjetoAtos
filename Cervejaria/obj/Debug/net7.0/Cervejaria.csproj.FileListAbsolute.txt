@@ -256,3 +256,5 @@ C:\ws_VisualStudio\Projeto Final Atos\Cervejaria\obj\Debug\net7.0\refint\Cerveja
 C:\ws_VisualStudio\Projeto Final Atos\Cervejaria\obj\Debug\net7.0\Cervejaria.pdb
 C:\ws_VisualStudio\Projeto Final Atos\Cervejaria\obj\Debug\net7.0\Cervejaria.genruntimeconfig.cache
 C:\ws_VisualStudio\Projeto Final Atos\Cervejaria\obj\Debug\net7.0\ref\Cervejaria.dll
+C:\ws_VisualStudio\Projeto Final Atos\Cervejaria\bin\Debug\net7.0\Cervejaria.xml
+C:\ws_VisualStudio\Projeto Final Atos\Cervejaria\obj\Debug\net7.0\Cervejaria.xml
