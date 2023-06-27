@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cervejaria</name>
+    </assembly>
+    <members>
+        <member name="M:Cervejaria.Controllers.EstoqueController.CadastroEstoque(Cervejaria.Models.Estoque)">
+            <summary>
+            Salva um estoque no banco de dados 
+            </summary>
+            <param name="estoque">Objeto com os campos necessários para criação de um estoque</param>
+            <returns>Dados do estoque cadastrado</returns>
+            <response code="201">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response> 
+        </member>
+        <member name="M:Cervejaria.Controllers.EstoqueController.AtualizaDadosEstoques(Cervejaria.Models.Estoque,System.Int32)">
+            <summary>
+            Atualiza um estoque no banco de dados usando seu id
+            </summary>
+            <param name="estoque">Objeto com os campos necessários para atualização de um estoque</param>
+            <param name="id">Id do estoque a ser atualizado no banco</param>
+            <returns>Dados do estoque atualizado</returns>
+            <response code="200">Caso a atualização de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="404">Caso o id do estoque seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.EstoqueController.ListagemEstoques">
+            <summary>
+            Recupera uma lista de estoques no banco de dados  
+            </summary>        
+            <returns>Dados dos estoques</returns>
+            <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
+            <response code="400">Requisição mal sucedida</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Cervejaria.Controllers.EstoqueController.ListarEstoquePorId(System.Int32)" -->
+        <member name="M:Cervejaria.Controllers.EstoqueController.ExcluirEstoque(System.Int32)">
+            <summary>
+            Deleta um estoque no banco de dados
+            </summary>        
+            <param name="id">Id do estoque a ser deletado no banco</param>
+            <returns>Sem dados para retornar</returns>
+            <response code="204">Caso o estoque seja deletado com sucesso</response>
+            <response code="400">Erro no pedido de exclusão, não é permitido exclusão com ingrediente associado</response>
+            <response code="404">Estoque não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.IngredienteController.CadastroIngrediente(Cervejaria.Models.Ingrediente)">
+            <summary>
+            Salva um ingrediente no banco de dados 
+            </summary>
+            <param name="producao">Objeto com os campos necessários para criação de um ingrediente</param>
+            <returns>Dados do ingrediente cadastrado</returns>
+            <response code="201">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response> 
+            <response code="404">Caso o id do estoque seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.IngredienteController.AtualizaDadosIngrediente(Cervejaria.Models.Ingrediente,System.Int32)">
+            <summary>
+            Atualiza um ingrediente no banco de dados usando seu id
+            </summary>
+            <param name="ingrediente">Objeto com os campos necessários para atualização de um ingrediente</param>
+            <param name="id">Id do ingrediente a ser atualizado no banco</param>
+            <returns>Dados do ingrediente atualizado</returns>
+            <response code="200">Caso a atualização de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="404">Caso o id de ingrediente ou estoque seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.IngredienteController.ListagemIngrediente">
+            <summary>
+            Recupera uma lista de ingredientes no banco de dados  
+            </summary>        
+            <returns>Dados dos ingredientes</returns>
+            <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
+            <response code="400">Requisição mal sucedida</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Cervejaria.Controllers.IngredienteController.ListarIngredientePorId(System.Int32)" -->
+        <member name="M:Cervejaria.Controllers.IngredienteController.ExcluirReceita(System.Int32)">
+            <summary>
+            Deleta um ingrediente no banco de dados
+            </summary>        
+            <param name="id">Id do ingrediente a ser deletado no banco</param>
+            <returns>Sem dados para retornar</returns>
+            <response code="204">Caso o ingrediente seja deletado com sucesso</response>
+            <response code="400">Erro no pedido de exclusão, não é permitido exclusão com relação ingrediente ativa</response>
+            <response code="404">Ingrediente não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ProducaoController.CadastroProducao(Cervejaria.Models.Producao)">
+            <summary>
+            Salva uma produção no banco de dados 
+            </summary>
+            <param name="producao">Objeto com os campos necessários para criação de uma produção</param>
+            <returns>Dados da produção cadastrada</returns>
+            <response code="201">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response> 
+            <response code="404">Caso o id da receita seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ProducaoController.AtualizaDadosProducao(Cervejaria.Models.Producao,System.Int32)">
+            <summary>
+            Atualiza uma produção no banco de dados usando seu id
+            </summary>
+            <param name="producao">Objeto com os campos necessários para atualização de uma producao</param>
+            <param name="id">Id da producao a ser atualizado no banco</param>
+            <returns>Dados da produção atualizados</returns>
+            <response code="200">Caso a atualização de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="404">Caso o id da produção ou receita seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ProducaoController.ListagemProducao">
+            <summary>
+            Recupera uma lista de produções no banco de dados  
+            </summary>        
+            <returns>Dados das produções</returns>
+            <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
+            <response code="400">Requisição mal sucedida</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Cervejaria.Controllers.ProducaoController.ListarProducaoPorId(System.Int32)" -->
+        <member name="M:Cervejaria.Controllers.ProducaoController.ExcluirProducao(System.Int32)">
+            <summary>
+            Deleta uma produção no banco de dados
+            </summary>        
+            <param name="id">Id da produção a ser deletado no banco</param>
+            <returns>Sem dados para retornar</returns>
+            <response code="204">Caso a produção seja deletada com sucesso</response>
+            <response code="400">Erro no pedido de exclusão</response>
+            <response code="404">Produção não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.CadastroReceitaIngrediente(Cervejaria.Models.ReceitaIngrediente)">
+            <summary>
+            Salva uma relação receita ingrediente no banco de dados 
+            </summary>
+            <param name="receitaIngrediente">Objeto com os campos necessários para criação de uma receita ingrediente</param>
+            <returns>Dados da relação receita ingrediente cadastrados</returns>
+            <response code="201">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response> 
+            <response code="404">Caso o id de receita e/ou ingrediente seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.AtualizaDadosReceitaIgrediente(Cervejaria.Models.ReceitaIngrediente,System.Int32)">
+            <summary>
+            Atualiza uma relação receita ingrediente no banco de dados usando seu id
+            </summary>
+            <param name="receitaIngrediente">Objeto com os campos necessários para atualização de uma relação receita ingrediente</param>
+            <param name="id">Id da relação receita ingrediente a ser atualizado no banco</param>
+            <returns>Dados da relação receita ingrediente atualizado</returns>
+            <response code="200">Caso a atualização de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response> 
+            <response code="404">Caso o id de receita e/ou ingrediente seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.ListagemReceitaIngrediente">
+            <summary>
+            Recupera uma lista de relações receita ingrediente no banco de dados  
+            </summary>        
+            <returns>Dados das relações receita ingrediente </returns>
+            <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
+            <response code="400">Requisição mal sucedida</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.ExcluirReceitaIngrediente(System.Int32)">
+            <summary>
+            Deleta uma relação receita ingrediente no banco de dados conforme validaçoes 
+            </summary>        
+            <param name="id">Id da relação receita ingrediente a ser deletada no banco</param>
+            <returns>Sem dados para retornar</returns>
+            <response code="204">Caso a relação receita ingrediente seja deletada com sucesso</response>
+            <response code="400">Proibida a exclusão de relação receita ingrediente com receita associada</response>
+            <response code="404">Receita não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.ExcluirEspecialReceitaIngrediente(System.Int32)">
+            <summary>
+            Deleta uma relação receita ingrediente no banco de dados quando atualiza receita
+            </summary>        
+            <param name="id">Id da relação receita ingrediente a ser deletada no banco</param>
+            <returns>Sem dados para retornar</returns>
+            <response code="204">Caso a relação receita ingrediente seja deletada com sucesso</response>
+            <response code="400">Caso algum erro ocorra na inserção de dados</response>
+            <response code="404">Receita não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitasController.CadastroReceita(Cervejaria.Models.Receita)">
+            <summary>
+            Salva uma receita no banco de dados 
+            </summary>
+            <param name="receita">Objeto com os campos necessários para criação de uma receita</param>
+            <returns>Dados da receita cadastrado</returns>
+            <response code="201">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>       
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitasController.AtualizaDadosReceita(Cervejaria.Models.Receita,System.Int32)">
+            <summary>
+            Atualiza uma receita no banco de dados usando seu id
+            </summary>
+            <param name="receita">Objeto com os campos necessários para atualização de uma receita</param>
+            <param name="id">Id da receita a ser atualizado no banco</param>
+            <returns>Dados da receita atualizado</returns>
+            <response code="200">Caso a atualização de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitasController.ListagemReceita">
+            <summary>
+            Recupera uma lista de receitas no banco de dados  
+            </summary>        
+            <returns>Dados das receitas</returns>
+            <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
+            <response code="400">Requisição mal sucedida</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitasController.ListarReceitaPorId(System.Int32)">
+            <summary>
+            Recupera uma receita no banco de dados pelo seu id 
+            </summary>        
+            <param name="id">Id da receita a ser recuperado no banco</param>
+            <returns>Dados da receita</returns>
+            <response code="200">Caso a receita seja recuperada com sucesso</response>        
+            <response code="404">Receita não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.ReceitasController.ExcluirReceita(System.Int32)">
+            <summary>
+            Deleta uma receita no banco de dados conforme validaçoes e suas relações ingrediente receita
+            </summary>        
+            <param name="id">Id da receita a ser deletada no banco</param>
+            <returns>Sem dados para retornar</returns>
+            <response code="204">Caso a receita seja deletada com sucesso</response>
+            <response code="400">Proibida a exclusão de receita com produção associada</response>
+            <response code="404">Receita não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.UsuariosController.CadastroUsuario(Cervejaria.Models.Usuario)">
+            <summary>
+            Salva um usuário no banco de dados 
+            </summary>
+            <param name="usuario">Objeto com os campos necessários para criação de um usuario</param>
+            <returns>Dados do usuario cadastrado</returns>
+            <response code="201">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="409">CNPJ ou email já existe no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.UsuariosController.AtualizaDadosUsuario(Cervejaria.Models.Usuario,System.Int32)">
+            <summary>
+            Atualiza um usuário no banco de dados usando seu id
+            </summary>
+            <param name="usuario">Objeto com os campos necessários para atualização de um usuario</param>
+            <param name="id">Id do usuario a ser atualizado no banco</param>
+            <returns>Dados do usuario atualizado</returns>
+            <response code="200">Caso a atualização de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="404">Caso o id seja inexistente na base de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.UsuariosController.ListagemUsuario">
+            <summary>
+            Recupera uma lista de usuários no banco de dados  
+            </summary>        
+            <returns>Dados dos usuarios</returns>
+            <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
+            <response code="400">Requisição mal sucedida</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.UsuariosController.ListarUsuarioPorId(System.Int32)">
+            <summary>
+            Recupera um usuário no banco de dados pelo seu id  
+            </summary>        
+            <param name="id">Id do usuario a ser recuperado no banco</param>
+            <returns>Dados do usuario</returns>
+            <response code="200">Caso o usuario seja recuperada com sucesso</response>
+            <response code="404">Usuario não encontrado no banco de dados</response>
+        </member>
+        <member name="T:Cervejaria.Migrations.Cervejaria">
+            <inheritdoc />
+        </member>
+        <member name="M:Cervejaria.Migrations.Cervejaria.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cervejaria.Migrations.Cervejaria.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Cervejaria.Migrations.Cervejaria.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
