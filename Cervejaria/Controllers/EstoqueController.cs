@@ -1,10 +1,12 @@
 ﻿using Cervejaria.Contexto;
 using Cervejaria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cervejaria.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/estoques")]
 
@@ -23,9 +25,11 @@ namespace Cervejaria.Controllers
         /// <returns>Dados do estoque cadastrado</returns>
         /// <response code="201">Caso a inserção de dados seja feita com sucesso</response>
         /// <response code="400">Dados inválidos inseridos</response> 
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> CadastroEstoque(
             [FromBody] Estoque estoque)
         {
@@ -52,11 +56,13 @@ namespace Cervejaria.Controllers
         /// <returns>Dados do estoque atualizado</returns>
         /// <response code="200">Caso a atualização de dados seja feita com sucesso</response>
         /// <response code="400">Dados inválidos inseridos</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         /// <response code="404">Caso o id do estoque seja inexistente na base de dados</response>
         [HttpPut]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AtualizaDadosEstoques(
             [FromBody] Estoque estoque,
@@ -88,9 +94,11 @@ namespace Cervejaria.Controllers
         /// <returns>Dados dos estoques</returns>
         /// <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
         /// <response code="400">Requisição mal sucedida</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> ListagemEstoques()
         {
             try
@@ -107,11 +115,13 @@ namespace Cervejaria.Controllers
         /// </summary>        
         /// <param name="id">Id do estoque a ser recuperado no banco</param>
         /// <returns>Dados do ingrediente</returns>
-        /// <response code="200">Caso o estoque seja recuperada com sucesso</response>        
+        /// <response code="200">Caso o estoque seja recuperada com sucesso</response>  
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         /// <response code="404">Estoque não encontrado no banco de dados</response
         [HttpGet]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ListarEstoquePorId(
             [FromRoute] int id)
@@ -127,11 +137,13 @@ namespace Cervejaria.Controllers
         /// <returns>Sem dados para retornar</returns>
         /// <response code="204">Caso o estoque seja deletado com sucesso</response>
         /// <response code="400">Erro no pedido de exclusão, não é permitido exclusão com ingrediente associado</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         /// <response code="404">Estoque não encontrado no banco de dados</response>
         [HttpDelete]
         [Route("/api/estoques/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ExcluirEstoque(
             [FromRoute] int id)

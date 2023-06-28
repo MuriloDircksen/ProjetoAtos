@@ -15,21 +15,29 @@ namespace Cervejaria.JWT
     public class JWTAuthenticationManager : IJWTAuthenticationManager
     {
         private readonly CervejariaContexto _contexto;
+       // private bool teste = false;
         //List<Usuario> users = new List<Usuario>();
        
-        public JWTAuthenticationManager(CervejariaContexto contexto)
+        public JWTAuthenticationManager(string token, CervejariaContexto contexto)
         {
             _contexto = contexto;
-            //users = _contexto.Usuarios.ToList();
+            this.tokenKey = token;
         }               
-        public bool GetUser(string username, string password)
+        public async Task<bool> GetUser(string email, string senha)
         {
-            CervejariaContexto _contexto = new CervejariaContexto();
-            Usuario user = _contexto.Usuarios.FirstOrDefault(u => u.Email == username );
-            if (user == null || user.Senha != password) 
+            //CervejariaContexto _contexto = new CervejariaContexto();
+            //Usuario user = _contexto.Usuarios.FirstOrDefault(u => u.Email == email );
+            List<Usuario> users = await _contexto.Usuarios.ToListAsync();
+            //users =await _contexto.Usuarios.ToListAsync();
+
+            foreach (var user in users)
             {
-                return false;
+                if (user.Email == email && user.Senha == senha)
+                {
+                   return true;
+                }
             }
+            
             return false;
         }
         
@@ -40,11 +48,10 @@ namespace Cervejaria.JWT
         {
             this.tokenKey = tokenKey;
         }
-        public string Authenticate(string username, string password)
+        public string Authenticate(string email, string senha)
         {
             
-            //no nosso projeto, substituir por consulta no banco
-            if (this.GetUser(username, password)) //verifica e existe um usuário na dictonary
+            if (!this.GetUser(email, senha).Result) 
             {
                 return null;
             }
@@ -56,7 +63,7 @@ namespace Cervejaria.JWT
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, username),
+                    new Claim(ClaimTypes.Name, email),
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials

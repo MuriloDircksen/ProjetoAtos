@@ -12,6 +12,7 @@
             <returns>Dados do estoque cadastrado</returns>
             <response code="201">Caso a inserção de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response> 
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <member name="M:Cervejaria.Controllers.EstoqueController.AtualizaDadosEstoques(Cervejaria.Models.Estoque,System.Int32)">
             <summary>
@@ -22,6 +23,7 @@
             <returns>Dados do estoque atualizado</returns>
             <response code="200">Caso a atualização de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id do estoque seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.EstoqueController.ListagemEstoques">
@@ -31,6 +33,7 @@
             <returns>Dados dos estoques</returns>
             <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
             <response code="400">Requisição mal sucedida</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Cervejaria.Controllers.EstoqueController.ListarEstoquePorId(System.Int32)" -->
         <member name="M:Cervejaria.Controllers.EstoqueController.ExcluirEstoque(System.Int32)">
@@ -41,6 +44,7 @@
             <returns>Sem dados para retornar</returns>
             <response code="204">Caso o estoque seja deletado com sucesso</response>
             <response code="400">Erro no pedido de exclusão, não é permitido exclusão com ingrediente associado</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Estoque não encontrado no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.IngredienteController.CadastroIngrediente(Cervejaria.Models.Ingrediente)">
@@ -51,6 +55,7 @@
             <returns>Dados do ingrediente cadastrado</returns>
             <response code="201">Caso a inserção de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response> 
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id do estoque seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.IngredienteController.AtualizaDadosIngrediente(Cervejaria.Models.Ingrediente,System.Int32)">
@@ -62,6 +67,7 @@
             <returns>Dados do ingrediente atualizado</returns>
             <response code="200">Caso a atualização de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id de ingrediente ou estoque seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.IngredienteController.ListagemIngrediente">
@@ -71,6 +77,7 @@
             <returns>Dados dos ingredientes</returns>
             <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
             <response code="400">Requisição mal sucedida</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Cervejaria.Controllers.IngredienteController.ListarIngredientePorId(System.Int32)" -->
         <member name="M:Cervejaria.Controllers.IngredienteController.ExcluirReceita(System.Int32)">
@@ -81,6 +88,7 @@
             <returns>Sem dados para retornar</returns>
             <response code="204">Caso o ingrediente seja deletado com sucesso</response>
             <response code="400">Erro no pedido de exclusão, não é permitido exclusão com relação ingrediente ativa</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Ingrediente não encontrado no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ProducaoController.CadastroProducao(Cervejaria.Models.Producao)">
@@ -91,6 +99,7 @@
             <returns>Dados da produção cadastrada</returns>
             <response code="201">Caso a inserção de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response> 
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id da receita seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ProducaoController.AtualizaDadosProducao(Cervejaria.Models.Producao,System.Int32)">
@@ -102,6 +111,7 @@
             <returns>Dados da produção atualizados</returns>
             <response code="200">Caso a atualização de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id da produção ou receita seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ProducaoController.ListagemProducao">
@@ -111,6 +121,7 @@
             <returns>Dados das produções</returns>
             <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
             <response code="400">Requisição mal sucedida</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <!-- Badly formed XML comment ignored for member "M:Cervejaria.Controllers.ProducaoController.ListarProducaoPorId(System.Int32)" -->
         <member name="M:Cervejaria.Controllers.ProducaoController.ExcluirProducao(System.Int32)">
@@ -121,6 +132,7 @@
             <returns>Sem dados para retornar</returns>
             <response code="204">Caso a produção seja deletada com sucesso</response>
             <response code="400">Erro no pedido de exclusão</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Produção não encontrado no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.CadastroReceitaIngrediente(Cervejaria.Models.ReceitaIngrediente)">
@@ -131,6 +143,7 @@
             <returns>Dados da relação receita ingrediente cadastrados</returns>
             <response code="201">Caso a inserção de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response> 
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id de receita e/ou ingrediente seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.AtualizaDadosReceitaIgrediente(Cervejaria.Models.ReceitaIngrediente,System.Int32)">
@@ -142,6 +155,7 @@
             <returns>Dados da relação receita ingrediente atualizado</returns>
             <response code="200">Caso a atualização de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response> 
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id de receita e/ou ingrediente seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.ListagemReceitaIngrediente">
@@ -151,6 +165,7 @@
             <returns>Dados das relações receita ingrediente </returns>
             <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
             <response code="400">Requisição mal sucedida</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.ExcluirReceitaIngrediente(System.Int32)">
             <summary>
@@ -160,6 +175,7 @@
             <returns>Sem dados para retornar</returns>
             <response code="204">Caso a relação receita ingrediente seja deletada com sucesso</response>
             <response code="400">Proibida a exclusão de relação receita ingrediente com receita associada</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Receita não encontrado no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitaIngredientesController.ExcluirEspecialReceitaIngrediente(System.Int32)">
@@ -170,6 +186,7 @@
             <returns>Sem dados para retornar</returns>
             <response code="204">Caso a relação receita ingrediente seja deletada com sucesso</response>
             <response code="400">Caso algum erro ocorra na inserção de dados</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Receita não encontrado no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitasController.CadastroReceita(Cervejaria.Models.Receita)">
@@ -179,7 +196,8 @@
             <param name="receita">Objeto com os campos necessários para criação de uma receita</param>
             <returns>Dados da receita cadastrado</returns>
             <response code="201">Caso a inserção de dados seja feita com sucesso</response>
-            <response code="400">Dados inválidos inseridos</response>       
+            <response code="400">Dados inválidos inseridos</response>    
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitasController.AtualizaDadosReceita(Cervejaria.Models.Receita,System.Int32)">
             <summary>
@@ -190,6 +208,7 @@
             <returns>Dados da receita atualizado</returns>
             <response code="200">Caso a atualização de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitasController.ListagemReceita">
@@ -199,6 +218,7 @@
             <returns>Dados das receitas</returns>
             <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
             <response code="400">Requisição mal sucedida</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitasController.ListarReceitaPorId(System.Int32)">
             <summary>
@@ -206,7 +226,8 @@
             </summary>        
             <param name="id">Id da receita a ser recuperado no banco</param>
             <returns>Dados da receita</returns>
-            <response code="200">Caso a receita seja recuperada com sucesso</response>        
+            <response code="200">Caso a receita seja recuperada com sucesso</response>   
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Receita não encontrado no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.ReceitasController.ExcluirReceita(System.Int32)">
@@ -217,7 +238,18 @@
             <returns>Sem dados para retornar</returns>
             <response code="204">Caso a receita seja deletada com sucesso</response>
             <response code="400">Proibida a exclusão de receita com produção associada</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Receita não encontrado no banco de dados</response>
+        </member>
+        <member name="M:Cervejaria.Controllers.UsuariosController.Authenticate(Cervejaria.DTO.request.ValidaçãoUsuarioDTO)">
+            <summary>
+            Realiza validação de usuario e senha, retornando um bearer token 
+            </summary>
+            <param name="user">Objeto com os campos necessários para validação de um usuario</param>
+            <returns>Bearer Token</returns>
+            <response code="200">Caso a inserção de dados seja feita com sucesso</response>
+            <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, credenciais inválidas</response>
         </member>
         <member name="M:Cervejaria.Controllers.UsuariosController.CadastroUsuario(Cervejaria.Models.Usuario)">
             <summary>
@@ -227,6 +259,7 @@
             <returns>Dados do usuario cadastrado</returns>
             <response code="201">Caso a inserção de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="409">CNPJ ou email já existe no banco de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.UsuariosController.AtualizaDadosUsuario(Cervejaria.Models.Usuario,System.Int32)">
@@ -238,6 +271,7 @@
             <returns>Dados do usuario atualizado</returns>
             <response code="200">Caso a atualização de dados seja feita com sucesso</response>
             <response code="400">Dados inválidos inseridos</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Caso o id seja inexistente na base de dados</response>
         </member>
         <member name="M:Cervejaria.Controllers.UsuariosController.ListagemUsuario">
@@ -247,6 +281,7 @@
             <returns>Dados dos usuarios</returns>
             <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
             <response code="400">Requisição mal sucedida</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
         </member>
         <member name="M:Cervejaria.Controllers.UsuariosController.ListarUsuarioPorId(System.Int32)">
             <summary>
@@ -255,6 +290,7 @@
             <param name="id">Id do usuario a ser recuperado no banco</param>
             <returns>Dados do usuario</returns>
             <response code="200">Caso o usuario seja recuperada com sucesso</response>
+            <response code="401">Acesso não autorizado, token inválido</response>
             <response code="404">Usuario não encontrado no banco de dados</response>
         </member>
         <member name="T:Cervejaria.Migrations.Cervejaria">

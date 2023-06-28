@@ -21,6 +21,13 @@ namespace Cervejaria
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //builder.Services.AddScoped<CervejariaContexto>();
+            builder.Services.AddDbContext<CervejariaContexto>(options =>
+                                options.UseSqlServer(
+                                    builder.Configuration.GetConnectionString("ServerConnection")));
+            builder.Services.AddDbContext<CervejariaContexto>(); //libera injeção de dependência nas classes da controller
+
+
             //-- configurando o tolken
             var tokenKey = "aqui vai a minha key provada e secreta";
             var key = Encoding.ASCII.GetBytes(tokenKey);
@@ -41,16 +48,14 @@ namespace Cervejaria
                     ValidateAudience = false
                 };
             });
+            //builder.Services.AddSingleton<IJWTAuthenticationManager>(new JWTAuthenticationManager(tokenKey,
+           // builder.Services.BuildServiceProvider().GetRequiredService<CervejariaContexto>();
+
             builder.Services.AddSingleton<IJWTAuthenticationManager>
-               (new JWTAuthenticationManager(tokenKey));
+               (new JWTAuthenticationManager(tokenKey, builder.Services.BuildServiceProvider().GetRequiredService<CervejariaContexto>()));
             //--
 
-
-            builder.Services.AddDbContext<CervejariaContexto>(options =>
-                                options.UseSqlServer(
-                                    builder.Configuration.GetConnectionString("ServerConnection")));
-            builder.Services.AddDbContext<CervejariaContexto>(); //libera injeção de dependência nas classes da controller
-
+            
             builder.Services.AddControllers().AddNewtonsoftJson(
                 x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 

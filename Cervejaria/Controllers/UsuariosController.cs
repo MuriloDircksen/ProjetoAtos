@@ -5,6 +5,7 @@ using Cervejaria.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Cervejaria.Controllers
 {
@@ -21,17 +22,38 @@ namespace Cervejaria.Controllers
             _contexto = contexto;
             _jWTAuthenticationManager = jWTAuthenticationManager;
         }
-        [AllowAnonymous] // gerar autenticação
+        /// <summary>
+        /// Realiza validação de usuario e senha, retornando um bearer token 
+        /// </summary>
+        /// <param name="user">Objeto com os campos necessários para validação de um usuario</param>
+        /// <returns>Bearer Token</returns>
+        /// <response code="200">Caso a inserção de dados seja feita com sucesso</response>
+        /// <response code="400">Dados inválidos inseridos</response>
+        /// <response code="401">Acesso não autorizado, credenciais inválidas</response>
+        [AllowAnonymous] 
         [HttpPost("autenticar")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public IActionResult Authenticate([FromBody] ValidaçãoUsuarioDTO user)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Dados inválidos, favor verificar o formato obrigatório dos dados!");
+            }
             var token = _jWTAuthenticationManager.Authenticate(user.Email, user.Senha);
-
+            JsonSerializer serializer = new JsonSerializer();
+            StringWriter sw = new StringWriter();
+            JsonWriter writer = new JsonTextWriter(sw);
+            serializer.Serialize(writer, token);
+            sw.Close();
+            writer.Close();
             if (token == null)
             {
                 return Unauthorized();
             }
-            return Ok(token);
+            return Ok(sw.ToString());
+            
         }
         /// <summary>
         /// Salva um usuário no banco de dados 
@@ -40,10 +62,13 @@ namespace Cervejaria.Controllers
         /// <returns>Dados do usuario cadastrado</returns>
         /// <response code="201">Caso a inserção de dados seja feita com sucesso</response>
         /// <response code="400">Dados inválidos inseridos</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         /// <response code="409">CNPJ ou email já existe no banco de dados</response>
+        [AllowAnonymous]
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> CadastroUsuario(
             [FromBody] Usuario usuario)
@@ -74,11 +99,13 @@ namespace Cervejaria.Controllers
         /// <returns>Dados do usuario atualizado</returns>
         /// <response code="200">Caso a atualização de dados seja feita com sucesso</response>
         /// <response code="400">Dados inválidos inseridos</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         /// <response code="404">Caso o id seja inexistente na base de dados</response>
         [HttpPut]
         [Route("/api/usuarios/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AtualizaDadosUsuario(
             [FromBody] Usuario usuario,
@@ -115,10 +142,12 @@ namespace Cervejaria.Controllers
         /// <returns>Dados dos usuarios</returns>
         /// <response code="200">Caso a lista de dados seja recuperada com sucesso</response>
         /// <response code="400">Requisição mal sucedida</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         [HttpGet]
         [Route("/api/usuarios/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]        
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> ListagemUsuario()
         {
             try
@@ -137,10 +166,12 @@ namespace Cervejaria.Controllers
         /// <param name="id">Id do usuario a ser recuperado no banco</param>
         /// <returns>Dados do usuario</returns>
         /// <response code="200">Caso o usuario seja recuperada com sucesso</response>
+        /// <response code="401">Acesso não autorizado, token inválido</response>
         /// <response code="404">Usuario não encontrado no banco de dados</response>
         [HttpGet]
         [Route("/api/usuarios/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ListarUsuarioPorId(
             [FromRoute] int id)
