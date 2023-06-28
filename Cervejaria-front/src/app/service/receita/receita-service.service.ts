@@ -4,6 +4,7 @@ import { Observable, catchError, retry,  throwError } from 'rxjs';
 import { IReceitaIngrediente } from 'src/app/models/receita-ingrediente';
 import { IReceitas } from 'src/app/models/receitas';
 import { TokenService } from '../token/token.service';
+import {  Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ReceitasServiceService {
  private url :string = "https://localhost:7227/api/receitas";
  private url2:string = "https://localhost:7227/api/receitaingredientes"
 
- constructor(private http: HttpClient, private tokenService : TokenService) { }
+ constructor(private http: HttpClient, private tokenService : TokenService, private router : Router) { }
 
  token = this.tokenService.getToken();
  httpOptions = {
@@ -94,6 +95,10 @@ export class ReceitasServiceService {
       // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` +
       `mensagem: ${error.message}`;
+    }
+    if(error.status ==401){
+      window.alert("Token venceu!");
+      this.router.navigate(['/login']);
     }
     console.log(errorMessage);
     //window.alert(errorMessage);

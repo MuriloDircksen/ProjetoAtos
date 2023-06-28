@@ -11,12 +11,28 @@
       <div class="form-floating mt-3 mb-4">
         <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
         <label for="floatingInput">Informe seu e-mail</label>
+        <ng-container *ngIf="formUsuario.get('email')?.touched">
+          <span *ngIf="formUsuario.get('email')?.hasError('required')">
+              Campo obrigatório
+          </span>
+          <span *ngIf="formUsuario.get('email')?.hasError('email')">
+              E-mail inválido
+          </span>
+      </ng-container>
       </div>
       <div class="form-floating mb-4">
         <input formControlName="senha" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Informe sua senha</label>
+        <ng-container *ngIf="formUsuario.get('senha')?.touched">
+          <span *ngIf="formUsuario.get('senha')?.hasError('required')">
+              Campo obrigatório
+          </span>
+          <span *ngIf="formUsuario.get('senha')?.hasError('minlength')">
+              Minimo de 8 caracteres
+          </span>
+      </ng-container>
       </div>
-      <button type="submit"  class="btn btn-primary">Entrar</button>
+      <button type="submit" [disabled]="!formUsuario.valid" class="btn btn-primary">Entrar</button>
     </div>
 
     <br>
