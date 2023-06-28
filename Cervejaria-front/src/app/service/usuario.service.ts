@@ -16,6 +16,12 @@ export class UsuarioService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
+  gerarToken(objeto : any) :Observable<any>{
+    return this.http.post<any>(`${this.url}/autenticar`, JSON.stringify(objeto), this.httpOptions)
+    .pipe(
+      catchError(this.handleError));
+  }
+
   getUsuarios():Observable<IUsuario[]>{
     return this.http.get<IUsuario[]>(this.url)
     .pipe(
@@ -30,6 +36,7 @@ export class UsuarioService {
       catchError(this.handleError));
   }
 
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
@@ -39,6 +46,9 @@ export class UsuarioService {
       // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` +
       `mensagem: ${error.message}`;
+    }
+    if(error.status === 401){
+      window.alert('Email ou senha inválidos!')
     }
     console.log(errorMessage);
     //window.alert(errorMessage);

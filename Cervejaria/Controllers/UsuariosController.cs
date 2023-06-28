@@ -1,21 +1,38 @@
 ﻿using Cervejaria.Contexto;
+using Cervejaria.DTO.request;
+using Cervejaria.JWT;
 using Cervejaria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cervejaria.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/usuarios")]
     public class UsuariosController : ControllerBase
     {
         private readonly CervejariaContexto _contexto;
+        private readonly IJWTAuthenticationManager _jWTAuthenticationManager;
 
-        public UsuariosController(CervejariaContexto contexto)
+        public UsuariosController(CervejariaContexto contexto, IJWTAuthenticationManager jWTAuthenticationManager)
         {
             _contexto = contexto;
+            _jWTAuthenticationManager = jWTAuthenticationManager;
         }
+        [AllowAnonymous] // gerar autenticação
+        [HttpPost("autenticar")]
+        public IActionResult Authenticate([FromBody] ValidaçãoUsuarioDTO user)
+        {
+            var token = _jWTAuthenticationManager.Authenticate(user.Email, user.Senha);
 
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+            return Ok(token);
+        }
         /// <summary>
         /// Salva um usuário no banco de dados 
         /// </summary>

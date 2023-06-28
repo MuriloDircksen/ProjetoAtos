@@ -94,15 +94,14 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
 
   criarNovoEstoque(){
     const nomeEstoque = prompt('Digite o nome do novo estoque:');
-    console.log(nomeEstoque, nomeEstoque?.length);
 
     if(nomeEstoque && nomeEstoque.length>=3){
       const estoque: any={
-        nome:nomeEstoque
+        nomeEstoque:nomeEstoque
       }
       this.estoqueService.salvarEstoque(estoque).subscribe();
-      this.zerarListas();
-      this.buscaIngredientes();
+
+      this.listaCombinada= [];
       this.buscaEstoque();
       return;
     }
@@ -117,8 +116,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
         nome: nomeEstoque
       }
       this.estoqueService.atualizarEstoque(estoque).subscribe();
-      this.zerarListas();
-      this.buscaIngredientes();
+      this.listaCombinada= [];
       this.buscaEstoque();
       return;
     }
@@ -130,6 +128,8 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
     this.listaIngredientes =[];
     this.listaUnificadaIngredientes= [];
     this.listaCombinada= [];
+    this.buscaIngredientes();
+    this.buscaEstoque();
   }
   excluirEstoque(id : number){
 
@@ -138,8 +138,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
       return;
     }
     this.estoqueService.excluirEstoque(id).subscribe();
-    this.zerarListas();
-    this.buscaIngredientes();
+    this.listaCombinada= [];
     this.buscaEstoque();
 
   }

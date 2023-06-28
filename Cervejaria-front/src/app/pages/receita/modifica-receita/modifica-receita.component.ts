@@ -260,7 +260,7 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
        this.numeroIngredientes.controls.forEach((control)=>{
         const ingrediente: any = {
            idReceita: parseInt(this.receitaId),
-           idIngrediente: parseInt(control.value.selectedIngredient),
+           idIngrediente: parseInt(control.value.selecionaIngrediente),
            quantidadeDeIngrediente: parseInt(control.value.quantidade)
          }
         listaControleIngredientes.push(ingrediente);

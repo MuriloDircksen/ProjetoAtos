@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, retry,  throwError } from 'rxjs';
 import { IReceitaIngrediente } from 'src/app/models/receita-ingrediente';
 import { IReceitas } from 'src/app/models/receitas';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,26 +15,28 @@ export class ReceitasServiceService {
  private url :string = "https://localhost:7227/api/receitas";
  private url2:string = "https://localhost:7227/api/receitaingredientes"
 
-  constructor(private http: HttpClient) { }
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
+ constructor(private http: HttpClient, private tokenService : TokenService) { }
+
+ token = this.tokenService.getToken();
+ httpOptions = {
+   headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.token}` })
+ }
 
   getReceitas():Observable<IReceitas[]>{
-    return this.http.get<IReceitas[]>(this.url)
+    return this.http.get<IReceitas[]>(this.url, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError));
   }
 
   getReceitaIngredientes():Observable<IReceitaIngrediente[]>{
-    return this.http.get<IReceitaIngrediente[]>(this.url2)
+    return this.http.get<IReceitaIngrediente[]>(this.url2, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError));
   }
   getReceita(id: number): Observable<IReceitas> {
-    return this.http.get<IReceitas>(`${this.url}/${id}`)
+    return this.http.get<IReceitas>(`${this.url}/${id}`, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError))
@@ -64,19 +67,19 @@ export class ReceitasServiceService {
       catchError(this.handleError));
   }
   excluirReceita(id: number): Observable<IReceitas> {
-    return this.http.delete<any>(`${this.url}/${id}`)
+    return this.http.delete<any>(`${this.url}/${id}`, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError));
   }
   excluirReceitaIngrediente(id: number): Observable<IReceitas> {
-    return this.http.delete<any>(`${this.url2}/${id}`)
+    return this.http.delete<any>(`${this.url2}/${id}`, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError));
   }
   excluirEspecialReceitaIngrediente(id: number): Observable<IReceitas> {
-    return this.http.delete<any>(`${this.url2}/atualizar/${id}`)
+    return this.http.delete<any>(`${this.url2}/atualizar/${id}`, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.handleError));

@@ -1,4 +1,6 @@
+import { TokenService } from './../../service/token/token.service';
 import { Component } from '@angular/core';
+
 
 @Component({
   selector: 'app-header',
@@ -6,8 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  constructor(private tokenService: TokenService){}
   sair(){
 
-    localStorage.setItem('segurança', 'false');
+    this.tokenService.removeToken;
   }
 }

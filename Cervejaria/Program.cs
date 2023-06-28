@@ -1,6 +1,10 @@
 
 using Cervejaria.Contexto;
+using Cervejaria.JWT;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Cervejaria
 {
@@ -17,7 +21,30 @@ namespace Cervejaria
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            
+            //-- configurando o tolken
+            var tokenKey = "aqui vai a minha key provada e secreta";
+            var key = Encoding.ASCII.GetBytes(tokenKey);
+
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            builder.Services.AddSingleton<IJWTAuthenticationManager>
+               (new JWTAuthenticationManager(tokenKey));
+            //--
+
 
             builder.Services.AddDbContext<CervejariaContexto>(options =>
                                 options.UseSqlServer(
@@ -50,6 +77,8 @@ namespace Cervejaria
             
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

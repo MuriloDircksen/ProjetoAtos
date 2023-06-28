@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lOGgorzcUyQwZi41EsrootTwBIPaTAgfSpPlCbSGknDgHXOYacl//Sbh9xuovDMgyvq7BwJZArnMQAAbxPJTsw==",
+  "dgSpecHash": "6d9nOZbV5TP7q5xCaYwT3ujAuONoQ4y/xKtwwtlJOuskPbD+cBvaDKw4y+UvO62HtUhg6mQd0NgwVifJcZETlA==",
   "success": true,
-  "projectFilePath": "C:\\ws_VisualStudio\\Projeto Final Atos\\Cervejaria\\Cervejaria.csproj",
+  "projectFilePath": "D:\\Murilo\\ws_vs\\Atos\\Projeto\\Projeto-ModuloI-main\\Cervejaria\\Cervejaria\\Cervejaria.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muril\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
@@ -57,6 +57,7 @@
     "C:\\Users\\muril\\.nuget\\packages\\humanizer.core.zh-cn\\2.14.1\\humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\humanizer.core.zh-hans\\2.14.1\\humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\humanizer.core.zh-hant\\2.14.1\\humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "C:\\Users\\muril\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.0\\microsoft.aspnetcore.authentication.jwtbearer.7.0.0.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\7.0.7\\microsoft.aspnetcore.jsonpatch.7.0.7.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\7.0.7\\microsoft.aspnetcore.mvc.newtonsoftjson.7.0.7.nupkg.sha512",
     "C:\\Users\\muril\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",

@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { IEstoque } from 'src/app/models/estoque';
+import { TokenService } from '../token/token.service';
 
 
 @Injectable({
@@ -12,19 +13,22 @@ export class EstoqueServiceService {
   //private url:string = "http://localhost:3000/estoques";
   private url:string = "https://localhost:7227/api/estoques";
 
-  constructor(private http: HttpClient) { }
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
+  constructor(private http: HttpClient, private tokenService : TokenService) { }
+
+    token = this.tokenService.getToken();
+    httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': `Bearer ${this.token}` })
+    }
 
   getEstoques():Observable<IEstoque[]>{
-    return this.http.get<IEstoque[]>(this.url)
+
+    return this.http.get<IEstoque[]>(this.url, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError));
   }
   getEstoque(id : number):Observable<IEstoque>{
-    return this.http.get<IEstoque>(`${this.url}/${id}`)
+    return this.http.get<IEstoque>(`${this.url}/${id}`, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError));
@@ -43,7 +47,7 @@ export class EstoqueServiceService {
   }
 
   excluirEstoque(id: number): Observable<IEstoque> {
-    return this.http.delete<any>(`${this.url}/${id}`)
+    return this.http.delete<any>(`${this.url}/${id}`, this.httpOptions)
     .pipe(
       retry(2),
       catchError(this.handleError));

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IUsuario } from 'src/app/models/usuario';
-import { UsuarioService } from 'src/app/service/usuario.service';
+import { AuthService } from 'src/app/service/login/auth.service';
+import { TokenService } from 'src/app/service/token/token.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -12,13 +15,13 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 export class LoginComponent implements OnInit {
   usuario!: IUsuario;
   formUsuario!: FormGroup;
-  listaUsuarios:IUsuario[]=[];
 
-  constructor(private serviceUsuario: UsuarioService, private router:Router){}
+
+  constructor( private tokenService: TokenService, private authService : AuthService, private router:Router){}
 
   ngOnInit(): void {
     this.criaForm();
-    this.getListaUsuarios();
+    //this.getListaUsuarios();
   }
 
   criaForm(){
@@ -36,38 +39,21 @@ export class LoginComponent implements OnInit {
     return this.formUsuario.get('senha')!;
   }
 
-  getListaUsuarios():void{
-    this.serviceUsuario.getUsuarios().subscribe((usuarios) => {
-      this.listaUsuarios = usuarios;
 
-     })
-   }
-
-   validaUsuario(){
-    return this.listaUsuarios.find((usuario)=>{
-
-      if(usuario.email === this.email.value){
-         if(usuario.senha == this.senha.value){
-
-           return true;
-         }
-
-       }
-       alert('Email ou senha inválidos!')
-       return false;
-
-     })
-
-   }
    onSubmit(){
+    const objeto : any ={
+      senha: this.senha.value,
+      email: this.email.value
+    }
+    this.authService.login(objeto);
+    const token = this.tokenService.getToken();
 
-    if(this.validaUsuario()){
+    if(token){
 
-      localStorage.setItem('segurança', 'true');
       this.router.navigate(['/home'])
+      return;
     }
 
+
   }
-
-
 }

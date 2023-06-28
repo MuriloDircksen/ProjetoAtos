@@ -1,7 +1,7 @@
 
 <div class="container small">
 
-  <form [formGroup]="formUsuario">
+  <form [formGroup]="formUsuario" (ngSubmit)="onSubmit()">
 
 
     <div class="quadro">
@@ -16,7 +16,7 @@
         <input formControlName="senha" type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Informe sua senha</label>
       </div>
-      <button (click)="onSubmit()" class="btn btn-primary">Entrar</button>
+      <button type="submit"  class="btn btn-primary">Entrar</button>
     </div>
 
     <br>
