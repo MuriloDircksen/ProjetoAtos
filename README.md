@@ -99,7 +99,7 @@ Para o desenvolvimento dessa aplicação, foram criados um sistema front-end atr
 
 ### Documentação Web API
 
-  Para melhor entendimento do funcionamento da API criado nesse projeto, foi criado um arquivo xml descrevendo cada end point.
+  Para melhor entendimento do funcionamento da API criado nesse projeto, é só acessar o arquivo xml que descreve cada end point.
 [Diagrama xml](https://github.com/MuriloDircksen/ProjetoAtos/blob/main/Cervejaria/Cervejaria.xml)
 
 ### Tipos de dados
@@ -138,4 +138,4 @@ Para o desenvolvimento dessa aplicação, foram criados um sistema front-end atr
 ### Autor
 
 Murilo Dircksen
-https://www.linkedin.com/in/murilodircksen/
+[Linkedin](https://www.linkedin.com/in/murilodircksen/)
