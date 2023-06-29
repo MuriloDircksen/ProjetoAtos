@@ -3,6 +3,7 @@
 Este projeto foi desenvolvido para simular um sistema de controle de estoque e produção em uma cervejaria, tornando de fácil acesso a essas informações. 
 Na aplicação é possível acompanhar as informações de forma simples e rápida, podendo inserir, alterar e deletar dados conforme a necessidade da empresa.
 Para o desenvolvimento dessa aplicação, foram criados um sistema front-end através da IDE VScode usando Angular CLI, que consome uma web API criado através da IDE Visual Studio usando C# .Net, com entity framework.
+Utilizei o trello como ferramenta de gestão e documentação, para organizar e fazer o acompanhamento do projeto.Fracionei o projeto em cards, cada qual com seus requisitos e data de entrega,a fim de melhor gerenciar o tempo disponivel e garantir que todas as demandas fossem executadas de forma organizada.
 
 ## Ferramentas e requisitos necessárias para rodar o projeto
 - Visual Studio 22
@@ -101,6 +102,10 @@ Para o desenvolvimento dessa aplicação, foram criados um sistema front-end atr
 
   Para melhor entendimento do funcionamento da API criado nesse projeto, é só acessar o arquivo xml que descreve cada end point.
 [Diagrama xml](https://github.com/MuriloDircksen/ProjetoAtos/blob/main/Cervejaria/Cervejaria.xml)
+
+### Trello do Projeto
+
+[Página trello Cervejaria](https://trello.com/invite/b/PKWKm7LT/ATTI0886fdff27c576b1fb4c5f8be2cf2f55287B2FB8/projeto-cervejaria)
 
 ### Tipos de dados
 
