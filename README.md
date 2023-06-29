@@ -90,7 +90,7 @@ Para o desenvolvimento dessa aplicação, foram criados um sistema front-end atr
                                                 }
                       }
     }
-}
+]
 
 
 ```
