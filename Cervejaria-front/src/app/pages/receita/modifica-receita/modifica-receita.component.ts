@@ -323,9 +323,9 @@ export class ModificaReceitaComponent implements OnInit, OnDestroy{
       this.router.navigate(['/Receita']);
       return;
     }
-    await this.receitaService.excluirReceita(this.receitaId).toPromise();
-
-    this.retornaPaginaReceita();
+    await this.receitaService.excluirReceita(this.receitaId).toPromise().then(()=>{
+      this.retornaPaginaReceita()
+    });
 
    }
 

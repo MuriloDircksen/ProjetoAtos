@@ -12,20 +12,49 @@
           <div  class="form-floating mt-3 mb-4 col-6">
             <input formControlName="nome" type="text" class="form-control" id="floatingNome" placeholder="Nome Receita">
             <label for="floatingNome">Nome Receita</label>
+            <ng-container *ngIf="formReceita.get('nome')?.touched">
+              <span *ngIf="formReceita.get('nome')?.hasError('required')">
+                  Campo obrigatório
+              </span>
+              <span *ngIf="formReceita.get('nome')?.hasError('minlength') || formReceita.get('nome')?.hasError('maxlength')">
+                  Nome deve ter no minimo 3 caracteres e máximo de 100
+              </span>
+          </ng-container>
           </div>
           <div  class="form-floating mt-3 mb-4 col-6">
             <input formControlName="responsavelReceita" type="text" class="form-control" id="floatingResponsavel" placeholder="Responsável Receita">
             <label for="floatingResponsavel">Responsável Receita</label>
+            <ng-container *ngIf="formReceita.get('responsavelReceita')?.touched">
+              <span *ngIf="formReceita.get('responsavelReceita')?.hasError('required')">
+                  Campo obrigatório
+              </span>
+              <span *ngIf="formReceita.get('responsavelReceita')?.hasError('minlength') || formReceita.get('responsavelReceita')?.hasError('maxlength')">
+                 Nome Responsável deve ter no minimo 10 caracteres e máximo de 200
+              </span>
+          </ng-container>
           </div>
         </div>
         <div class="row">
           <div  class="form-floating mt-3 mb-4 col-6">
             <input formControlName="estilo" type="text" class="form-control" id="floatingEstacao" placeholder="Estilo Cerveja">
             <label for="floatingEstacao">Estilo Cerveja</label>
+            <ng-container *ngIf="formReceita.get('estilo')?.touched">
+              <span *ngIf="formReceita.get('estilo')?.hasError('required')">
+                  Campo obrigatório
+              </span>
+              <span *ngIf="formReceita.get('estilo')?.hasError('minlength') || formReceita.get('estilo')?.hasError('maxlength')">
+                  Estilo deve ter no minimo 10 caracteres e máximo de 80
+              </span>
+          </ng-container>
           </div>
           <div  class="form-floating mt-3 mb-4 col-6">
-            <input formControlName="volumeReceita" type="text" class="form-control" id="floatingVolume" placeholder="Volume da Receita">
+            <input formControlName="volumeReceita" type="number" class="form-control" id="floatingVolume" placeholder="Volume da Receita">
             <label for="floatingVolume">Qual volume dessa receita?</label>
+            <ng-container *ngIf="formReceita.get('volumeReceita')?.touched">
+              <span *ngIf="formReceita.get('volumeReceita')?.hasError('required')">
+                  Campo obrigatório
+              </span>
+            </ng-container>
           </div>
         </div>
 
@@ -38,6 +67,11 @@
           <div class="form-floating mt-3 mb-4 col-6 ">
             <input formControlName="quantidadeIngredientes" (change)="onChangecontagemIngrediente()"  type="number" min="0" class="form-control" id="floatingquantidadeIngrediente" >
             <label for="floatingquantidadeIngrediente">Quantidade de ingredientes</label>
+            <ng-container *ngIf="formReceita.get('quantidadeIngredientes')?.touched">
+              <span *ngIf="formReceita.get('quantidadeIngredientes')?.hasError('required')">
+                  Campo obrigatório
+              </span>
+            </ng-container>
           </div>
         </div>
         <h5>Ingredientes:</h5>
@@ -49,10 +83,20 @@
                   <option value="" disabled selected>Ingrediente {{ i + 1 }}</option>
                   <option *ngFor="let ingredienteItem of listaIngredientes" [value]="ingredienteItem.id">{{ingredienteItem.nomeIngrediente}}</option>
                 </select>
+                <ng-container *ngIf="formReceita.get('selecionaIngrediente')?.touched">
+                  <span *ngIf="formReceita.get('selecionaIngrediente')?.hasError('required')">
+                      Campo obrigatório
+                  </span>
+                </ng-container>
               </div>
               <div class="form-floating mt-3 mb-4 col-6 ">
               <input formControlName="quantidade" (change)="calculaOrcamento()" type="text" class="form-control" id="floatingQuantidade" placeholder="Quantidade">
               <label for="floatingQuantidade">Quantidade do ingrediente</label>
+              <ng-container *ngIf="formReceita.get('quantidade')?.touched">
+                <span *ngIf="formReceita.get('quantidade')?.hasError('required')">
+                    Campo obrigatório
+                </span>
+              </ng-container>
             </div>
           </div>
         </div>

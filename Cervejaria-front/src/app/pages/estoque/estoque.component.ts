@@ -99,10 +99,11 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
       const estoque: any={
         nomeEstoque:nomeEstoque
       }
-      this.estoqueService.salvarEstoque(estoque).subscribe();
+      this.estoqueService.salvarEstoque(estoque).toPromise().then(()=>{
+        this.listaCombinada= [];
+        this.buscaEstoque()});
 
-      this.listaCombinada= [];
-      this.buscaEstoque();
+
       return;
     }
     prompt('Nome inválido, deve ter ao menos 3 caracteres');
@@ -123,23 +124,17 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
     prompt('Nome inválido, deve ter ao menos 3 caracteres');
 
   }
-  zerarListas(){
-    this.listaEstoque = [];
-    this.listaIngredientes =[];
-    this.listaUnificadaIngredientes= [];
-    this.listaCombinada= [];
-    this.buscaIngredientes();
-    this.buscaEstoque();
-  }
+
   excluirEstoque(id : number){
 
     if (this.verificarIngredientesAssociados(id)) {
       alert('Não é possível excluir o estoque, pois possui ingredientes associados.');
       return;
     }
-    this.estoqueService.excluirEstoque(id).subscribe();
-    this.listaCombinada= [];
-    this.buscaEstoque();
+    this.estoqueService.excluirEstoque(id).toPromise().then(()=>{
+      this.listaCombinada= [];
+      this.buscaEstoque()});
+
 
   }
   verificarIngredientesAssociados(id : number):boolean{

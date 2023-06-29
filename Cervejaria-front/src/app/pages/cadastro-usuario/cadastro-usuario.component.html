@@ -14,33 +14,60 @@
       <div  class="form-floating mt-3 mb-4">
         <input formControlName="nome" type="text" class="form-control" id="floatingNome" placeholder="Nome">
         <label for="floatingNome">Nome</label>
+        <ng-container *ngIf="formUsuario.get('nome')?.touched">
+          <span *ngIf="formUsuario.get('nome')?.hasError('required')">
+              Campo obrigatório
+          </span>
+          <span *ngIf="formUsuario.get('nome')?.hasError('minlength') || formUsuario.get('nome')?.hasError('maxlength')">
+              Nome deve ter no minimo 10 caracteres e máximo de 200
+          </span>
+      </ng-container>
       </div>
       <div  class="form-floating mt-3 mb-4">
         <input formControlName="empresa" type="text" class="form-control" id="floatingEmpresa" placeholder="Empresa">
         <label for="floatingEmpresa">Empresa</label>
+        <ng-container *ngIf="formUsuario.get('empresa')?.touched">
+          <span *ngIf="formUsuario.get('empresa')?.hasError('required')">
+              Campo obrigatório
+          </span>
+      </ng-container>
       </div>
       <div  class="form-floating mt-3 mb-4">
         <input formControlName="cnpj" type="text" class="form-control" id="floatingCnpj" placeholder="CNPJ">
         <label for="floatingCnpj">CNPJ</label>
+        <ng-container *ngIf="formUsuario.get('cnpj')?.touched">
+          <span *ngIf="formUsuario.get('cnpj')?.hasError('required')">
+              Campo obrigatório
+          </span>
+          <span *ngIf="formUsuario.get('cnpj')?.hasError('minlength') || formUsuario.get('cnpj')?.hasError('maxlength')">
+              CNPJ deve ter 14 caracteres numéricos
+          </span>
+      </ng-container>
       </div>
       <div  class="form-floating mt-3 mb-4">
         <input formControlName="email" type="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
         <label for="floatingEmail">Informe seu e-mail</label>
+        <ng-container *ngIf="formUsuario.get('email')?.touched">
+          <span *ngIf="formUsuario.get('email')?.hasError('required')">
+              Campo obrigatório
+          </span>
+          <span *ngIf="formUsuario.get('email')?.hasError('email')">
+              E-mail inválido
+          </span>
+      </ng-container>
       </div>
-
       <div  class="row">
         <div class="form-floating mt-3 mb-4 col-6 ">
           <input formControlName="senha" type="password" class="form-control" id="floatingSenha" placeholder="Senha">
           <label for="floatingSenha">Senha</label>
+
         </div>
         <div class="form-floating mt-3 mb-4 col-6 ">
           <input formControlName="confirmaSenha" type="password" class="form-control" id="floatingConfirma" placeholder="Confirmar Senha">
           <label for="floatingConfirma">Confirma senha</label>
+
         </div>
       </div>
-
-
-
       <button  type="submit" [disabled]="!formUsuario.valid" class="btn btn-primary">Criar conta</button>
     </div>
     <br>
