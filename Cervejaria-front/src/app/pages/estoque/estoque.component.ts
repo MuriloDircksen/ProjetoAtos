@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IEstoque } from 'src/app/models/estoque';
 import { IIngredientes } from 'src/app/models/ingredientes';
@@ -21,7 +20,7 @@ export class EstoqueComponent implements OnDestroy, OnInit  {
    listaCombinada: any[] = [];
 
    constructor(private ingredienteService: IngredienteServiceService,
-    private estoqueService : EstoqueServiceService, private router: Router){
+    private estoqueService : EstoqueServiceService){
       this.buscaIngredientes();
 
     }

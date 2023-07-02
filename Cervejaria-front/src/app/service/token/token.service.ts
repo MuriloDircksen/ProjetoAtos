@@ -20,5 +20,6 @@ export class TokenService {
 
   removeToken(): void {
     this.token = null;
+
   }
 }
